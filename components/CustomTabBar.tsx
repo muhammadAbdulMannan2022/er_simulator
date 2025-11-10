@@ -29,13 +29,10 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
       onLayout={(e) => setTabBarWidth(e.nativeEvent.layout.width)}>
       {/* Animated Tab Indicator */}
       {tabBarWidth > 0 && (
-        <View className="absolute left-0 top-0 z-10 h-2 flex-1 flex-col">
-          <Animated.View
-            className="absolute left-0 top-0 z-10 h-full rounded-lg bg-[#12B0C2]"
-            style={[{ width: indicatorWidth }, indicatorStyle]}
-          />
-          <Animated.View className={'absolute left-0 top-0 -z-10 h-14 w-[40px] bg-[#1dd881]'} />
-        </View>
+        <Animated.View
+          className="absolute left-0 top-0 z-10 h-2 rounded-lg bg-[#12B0C2]"
+          style={[{ width: indicatorWidth }, indicatorStyle]}
+        />
       )}
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
