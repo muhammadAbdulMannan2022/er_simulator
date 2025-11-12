@@ -25,12 +25,19 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
 
   return (
     <View
-      className="relative flex-row bg-[#595959]"
+      className="relative flex-row bg-[#fff]"
+      style={{
+        elevation: 3,
+        shadowColor: '#000000',
+        shadowOffset: { width: 0, height: -4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+      }}
       onLayout={(e) => setTabBarWidth(e.nativeEvent.layout.width)}>
       {/* Animated Tab Indicator */}
       {tabBarWidth > 0 && (
         <Animated.View
-          className="absolute left-0 top-0 z-10 h-2 rounded-lg bg-[#12B0C2]"
+          className="absolute left-0 top-0 z-10 h-2 rounded-lg bg-[#346C6C]"
           style={[{ width: indicatorWidth }, indicatorStyle]}
         />
       )}
@@ -70,13 +77,13 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
             {options.tabBarIcon &&
               options.tabBarIcon({
                 focused: isFocused,
-                color: isFocused ? '#12B0C2' : '#BBC3C4',
+                color: isFocused ? '#346C6C' : '#BBC3C4',
                 size: 28,
               })}
             <Text
               className={cn(
-                'text-sm font-normal',
-                isFocused ? 'text-[#12B0C2]' : 'text-[#BBC3C4]'
+                'text-sm font-medium',
+                isFocused ? 'text-[#346C6C]' : 'text-[#BBC3C4]'
               )}>
               {options.title}
             </Text>

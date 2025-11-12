@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
       },
 
       colors: {
@@ -15,6 +16,7 @@ module.exports = {
         foreground: '#0F0F0F',
         background: '#FBFEFE',
         'dark-gray': '#6A707C',
+        grayText: '#8E8E93',
       },
     },
   },

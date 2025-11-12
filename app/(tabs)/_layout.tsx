@@ -13,22 +13,28 @@ export default function Layout() {
 
   return (
     <>
-      <StatusBar backgroundColor="transparent" translucent barStyle="dark-content" />
-      <SafeAreaView className="flex-1 bg-[#E5E5E5]" edges={['top', 'left', 'right']}>
-        <View className={cn('flex-1 border-none bg-[#595959] pb-4')}>
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+      <SafeAreaView className="flex-1 bg-[#fff]" edges={['top', 'left', 'right']}>
+        <View className={cn('flex-1 border-none bg-[#fff] pb-4')}>
           <StyledTabs
             screenOptions={{
               headerShown: false,
               tabBarStyle: {
                 height: 40 + (insets.bottom || 0),
                 paddingBottom: insets.bottom || 0,
-                backgroundColor: '#595959',
-                borderTopWidth: 4,
-                elevation: 0, // removes Android shadow
-                shadowOpacity: 0, // removes iOS shadow
+                backgroundColor: '#fff',
+                borderTopWidth: 0,
+                // iOS shadow
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: -4 },
+                shadowOpacity: 0.1,
+                shadowRadius: 6,
+
+                // Android shadow
+                elevation: 6,
               },
-              tabBarActiveTintColor: '#12B0C2',
-              tabBarInactiveTintColor: '#BBC3C4',
+              tabBarActiveTintColor: '#346C6C',
+              tabBarInactiveTintColor: '#fff',
               tabBarButton: (props) => <NoRippleTabButton {...props} />,
             }}
             tabBar={(props) => <CustomTabBar {...props} />}>
