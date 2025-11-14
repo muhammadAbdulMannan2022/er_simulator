@@ -3,13 +3,12 @@ import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 
 export default function Layout({ children }: { children?: React.ReactNode }) {
   return (
-    // <SafeAreaView className="flex-1">
-    <ScrollView
-      className="flex-1"
-      contentContainerStyle={{ paddingBottom: 20 }}
-      style={{ backgroundColor: COLORS.offWhite }}>
-      {children}
-    </ScrollView>
-    // </SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.offWhite }}>
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1, backgroundColor: COLORS.offWhite, paddingBottom: 20 }}
+        style={{ flex: 1 }}>
+        {children}
+      </ScrollView>
+    </SafeAreaView>
   );
 }

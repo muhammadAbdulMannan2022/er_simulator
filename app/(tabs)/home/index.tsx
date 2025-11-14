@@ -11,9 +11,15 @@ import { getGradientColorAt } from 'utils/gradientcolor';
 import CardWithBar from 'components/ui/cardwithbar';
 import Trauma from '../../../assets/svgs/trauma.svg';
 import Treatments from 'components/ui/treatments';
+import CardWithBox from 'components/ui/cardwithbox';
+import { useState } from 'react';
+import { useRouter } from 'expo-router';
 
 export default function Index() {
   const dummyForm = useForm();
+  const [guest, useGuest] = useState(true);
+
+  const router = useRouter();
 
   return (
     <Layout>
@@ -58,7 +64,7 @@ export default function Index() {
           errors={{}}
         />
 
-        <CardWithBar />
+        {guest ? <CardWithBox /> : <CardWithBar />}
         <View style={{ marginTop: 30 }}>
           <Text className="font-roboto  text-3xl font-semibold">Skill Level</Text>
 
@@ -106,6 +112,7 @@ export default function Index() {
         </View>
         <View style={{ flexDirection: 'row', gap: 15, marginVertical: 20 }}>
           <TouchableOpacity
+            onPress={() => router.push('../others/caselist')}
             style={{
               flex: 1,
               backgroundColor: COLORS.orgbtn,

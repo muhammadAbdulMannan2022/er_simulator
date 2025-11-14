@@ -126,7 +126,14 @@ const CardWithBar = () => {
               </View>
             </View>
           </View>
-          <TouchableOpacity style={{}}>
+          <TouchableOpacity
+            style={{
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 3 },
+              shadowOpacity: 0.5,
+              shadowRadius: 5,
+              elevation: 5,
+            }}>
             <Text
               className="font-roboto text-lg font-semibold text-white"
               style={{
@@ -135,7 +142,7 @@ const CardWithBar = () => {
                 backgroundColor: COLORS.orgbtn,
                 borderWidth: 1,
                 borderColor: COLORS.orgbtn,
-                borderRadius: 10,
+                borderRadius: 8,
               }}>
               Resume
             </Text>
