@@ -205,6 +205,7 @@ export default function Index() {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => router.push('/profile/quiz')}
             style={{
               flexDirection: 'row',
               backgroundColor: '#E39348',
@@ -220,7 +221,7 @@ export default function Index() {
             }}>
             <Question />
             <Text className="font-roboto font-medium" style={{ fontSize: 20, color: '#fff' }}>
-              My CME qUIZ
+              My CME QUIZ
             </Text>
             <View
               style={{
@@ -305,6 +306,7 @@ export default function Index() {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => router.push('/profile/savedcertificates')}
               style={{
                 flexDirection: 'row',
                 backgroundColor: '#fff',
@@ -325,6 +327,7 @@ export default function Index() {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => router.push('/profile/support')}
               style={{
                 flexDirection: 'row',
                 backgroundColor: '#fff',
