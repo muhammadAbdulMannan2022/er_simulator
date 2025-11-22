@@ -26,6 +26,7 @@ const Case = () => {
         <View
           style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <TouchableOpacity
+            onPress={() => router.push('./caselist')}
             style={{
               backgroundColor: '#82A4A5',
               borderWidth: 1,
@@ -159,7 +160,7 @@ const Case = () => {
 
           <View style={{ marginTop: 40 }}>
             <TouchableOpacity
-              // onPress={() => router.push('./case')}
+              onPress={() => router.push('./chatbox')}
               style={{
                 flex: 1,
                 backgroundColor: COLORS.orgbtn,

@@ -69,8 +69,7 @@ export default function Index() {
           <Text className="font-roboto  text-3xl font-semibold">Skill Level</Text>
 
           <View style={{ flexDirection: 'row', gap: 10, marginVertical: 12 }}>
-            <TouchableOpacity
-              onPress={() => router.push('../others/chatbox')}
+            <View
               style={{
                 flex: 1,
                 backgroundColor: COLORS.deep,
@@ -82,8 +81,8 @@ export default function Index() {
                 elevation: 5,
               }}>
               <Text className="py-3 text-center text-lg font-bold text-white ">Beginner</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </View>
+            <View
               style={{
                 flex: 1,
                 backgroundColor: '#CFCFCF',
@@ -95,8 +94,8 @@ export default function Index() {
                 elevation: 5,
               }}>
               <Text className="py-3 text-center text-lg font-bold text-[#40464B] ">Try Me</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </View>
+            <View
               style={{
                 flex: 1,
                 backgroundColor: '#CFCFCF',
@@ -108,12 +107,11 @@ export default function Index() {
                 elevation: 5,
               }}>
               <Text className="py-3 text-center text-lg font-bold text-[#40464B] ">Beast Mode</Text>
-            </TouchableOpacity>
+            </View>
           </View>
         </View>
         <View style={{ flexDirection: 'row', gap: 15, marginVertical: 20 }}>
           <TouchableOpacity
-            onPress={() => router.push('../others/caselist')}
             style={{
               flex: 1,
               backgroundColor: COLORS.orgbtn,

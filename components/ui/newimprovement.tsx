@@ -27,7 +27,7 @@ const NewImprovement = () => {
           style={{
             flexDirection: 'row',
             gap: 5,
-            width: '85%',
+            width: '90%',
             alignSelf: 'center',
           }}>
           <View

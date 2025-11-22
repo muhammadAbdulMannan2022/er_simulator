@@ -5,7 +5,9 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   TextInput,
+  KeyboardAvoidingView,
   ScrollView,
+  Platform,
 } from 'react-native';
 import React from 'react';
 import { COLORS } from 'constants/color';
@@ -14,8 +16,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import TV from '../../assets/svgs/tv.svg';
 import Med from '../../assets/svgs/med.svg';
 import Mic from '../../assets/svgs/mic.svg';
+import Send from '../../assets/svgs/send.svg';
 import TLogo from '../../assets/svgs/text.svg';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+// import { KeyboardAvoidingView, KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { Input } from 'components/input';
 import { X } from 'lucide-react-native';
 import Horizontal from '../../assets/svgs/horizontal.svg';
@@ -24,7 +27,7 @@ import Layout from 'components/layout';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 
-const ChatBox = () => {
+const ChatWithText = () => {
   const { height } = useWindowDimensions();
   return (
     <View style={{ flex: 1 }}>
@@ -117,45 +120,83 @@ const ChatBox = () => {
             </View>
           </View>
         </SafeAreaView>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <View style={{ flex: 1, justifyContent: 'flex-end', padding: 20, gap: 5 }}>
-            <View style={{ alignItems: 'flex-start' }}>
-              <Text
-                className="font-roboto text-sm text-[#fff]"
-                style={{
-                  backgroundColor: '#43788F',
-                  paddingVertical: 8,
-                  paddingHorizontal: 15,
-                  borderWidth: 1,
-                  borderColor: '#E26C39',
-                  maxWidth: '80%',
-                  borderTopLeftRadius: 15,
-                  borderTopRightRadius: 15,
-                  borderBottomRightRadius: 15,
-                }}>
-                Hello, this is Swadhin, your Medical Simulation Assistant. I’m here to help support
-                your training by providing realistic, interactive simulations that improve clinical.
-              </Text>
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
+            <View style={{ flex: 1, justifyContent: 'flex-end', padding: 20, gap: 5 }}>
+              <View style={{ alignItems: 'flex-start' }}>
+                <Text
+                  className="font-roboto text-sm text-[#fff]"
+                  style={{
+                    backgroundColor: '#43788F',
+                    paddingVertical: 8,
+                    paddingHorizontal: 15,
+                    borderWidth: 1,
+                    borderColor: '#E26C39',
+                    maxWidth: '80%',
+                    borderTopLeftRadius: 15,
+                    borderTopRightRadius: 15,
+                    borderBottomRightRadius: 15,
+                  }}>
+                  Hello, this is Swadhin, your Medical Simulation Assistant. I’m here to help
+                  support your training by providing realistic, interactive simulations that improve
+                  clinical.
+                </Text>
+              </View>
+              <View style={{ alignItems: 'flex-end' }}>
+                <Text
+                  className="font-roboto text-sm text-[#fff]"
+                  style={{
+                    backgroundColor: '#43788F',
+                    paddingVertical: 8,
+                    paddingHorizontal: 15,
+                    borderWidth: 1,
+                    borderColor: '#E26C39',
+                    maxWidth: '80%',
+                    borderTopLeftRadius: 15,
+                    borderTopRightRadius: 15,
+                    borderBottomLeftRadius: 15,
+                  }}>
+                  Ok, I will assist you.
+                </Text>
+              </View>
             </View>
-            <View style={{ alignItems: 'flex-end' }}>
-              <Text
-                className="font-roboto text-sm text-[#fff]"
-                style={{
-                  backgroundColor: '#43788F',
-                  paddingVertical: 8,
-                  paddingHorizontal: 15,
-                  borderWidth: 1,
-                  borderColor: '#E26C39',
-                  maxWidth: '80%',
-                  borderTopLeftRadius: 15,
-                  borderTopRightRadius: 15,
-                  borderBottomLeftRadius: 15,
-                }}>
-                Ok, I will assist you.
-              </Text>
-            </View>
+          </ScrollView>
+          <View
+            style={{
+              paddingHorizontal: 20,
+              gap: 5,
+              borderWidth: 1,
+              marginHorizontal: 20,
+              marginBottom: 10,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              backgroundColor: '#43788F',
+              borderColor: '#43788F',
+              borderRadius: 50,
+            }}>
+            <TouchableOpacity onPress={() => router.push('/others/chatbox')}>
+              <Mic height={20} width={12} />
+            </TouchableOpacity>
+            <TextInput
+              style={{
+                flex: 1,
+
+                // backgroundColor: '#EFEFEF',
+                // borderRadius: 8,
+                paddingHorizontal: 12,
+                paddingVertical: 15,
+
+                fontSize: 16,
+              }}
+              placeholder="Type Your Message"
+              placeholderTextColor="#FFFFFF"
+            />
+            <Send />
           </View>
-        </ScrollView>
+        </KeyboardAvoidingView>
         <View style={{ justifyContent: 'flex-end' }}>
           <LinearGradient
             colors={['transparent', '#06272B']}
@@ -164,15 +205,15 @@ const ChatBox = () => {
               position: 'absolute',
               bottom: 0,
               width: '100%',
-              height: 160,
+              height: 70,
             }}
           />
           <View
             style={{
               width: '100%',
-              height: 175,
-              borderTopLeftRadius: 25,
-              borderTopRightRadius: 25,
+              height: 100,
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
               overflow: 'hidden',
             }}>
             <BlurView
@@ -180,7 +221,7 @@ const ChatBox = () => {
               tint="dark"
               style={{
                 width: '100%',
-                height: 175,
+                height: 100,
                 justifyContent: 'center',
                 paddingHorizontal: 20,
               }}>
@@ -188,55 +229,49 @@ const ChatBox = () => {
                 style={{
                   flex: 1,
                   flexDirection: 'row',
-                  alignItems: 'center',
+                  alignItems: 'flex-start',
                   justifyContent: 'space-between',
                   paddingHorizontal: 20,
-                  marginBottom: 10,
+                  paddingTop: 20,
                 }}>
                 <View>
                   <TV />
                 </View>
-                <View style={{ flex: 1, gap: 2, justifyContent: 'center', alignItems: 'center' }}>
-                  <LinearGradient
-                    colors={['#0096A7', '#B92D47']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 0, y: 1 }}
-                    style={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: 50,
-                      borderWidth: 10,
-                      borderColor: '#13505B',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <Mic />
-                  </LinearGradient>
-                  <Text className="font-roboto mb-2.5 text-sm text-[#E39348]">
-                    Tap To Speak With AI
-                  </Text>
-
-                  <TouchableOpacity
-                    onPress={() => router.push('/others/chatwithtext')}
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      gap: 10,
-                      borderWidth: 1,
-                      borderColor: '#fff',
-                      paddingHorizontal: 35,
-                      borderRadius: 20,
-                      paddingVertical: 3,
-                    }}>
-                    <TLogo />
-                    <Text className="font-roboto  text-[16px] text-[#fff]">Text Input</Text>
-                  </TouchableOpacity>
-                </View>
-
                 <View>
                   <Med />
                 </View>
               </View>
+              {/* <View
+                style={{
+                  paddingHorizontal: 20,
+                  gap: 5,
+                  borderWidth: 1,
+                  marginBottom: 40,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  backgroundColor: '#0A4E57',
+                  borderColor: '#0A4E57',
+                  borderRadius: 50,
+                  marginHorizontal: 10,
+                }}>
+                <Mic height={20} width={12} />
+                <TextInput
+                  style={{
+                    flex: 1,
+
+                    // backgroundColor: '#EFEFEF',
+                    // borderRadius: 8,
+                    paddingHorizontal: 12,
+                    paddingVertical: 15,
+
+                    fontSize: 16,
+                  }}
+                  placeholder="Type Your Message"
+                  placeholderTextColor="#FFFFFF"
+                />
+                <Send />
+              </View> */}
             </BlurView>
           </View>
         </View>
@@ -247,4 +282,4 @@ const ChatBox = () => {
   );
 };
 
-export default ChatBox;
+export default ChatWithText;

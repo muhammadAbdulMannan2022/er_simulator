@@ -25,7 +25,7 @@ export default function Index() {
         <Text className="font-roboto font-semibold " style={{ fontSize: 26 }}>
           My Profile
         </Text>
-        <View style={{ position: 'absolute', top: 0, left: 20 }}>
+        {/* <View style={{ position: 'absolute', top: 0, left: 20 }}>
           <TouchableOpacity
             style={{
               backgroundColor: '#82A4A5',
@@ -36,7 +36,7 @@ export default function Index() {
             }}>
             <X size={35} color={'#fff'} />
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
       <View
         style={{

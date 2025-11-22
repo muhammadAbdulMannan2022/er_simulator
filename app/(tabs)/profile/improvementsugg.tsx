@@ -5,6 +5,7 @@ import { COLORS } from 'constants/color';
 import { Bookmark, Plus, Save, X } from 'lucide-react-native';
 import NewImprovement from 'components/ui/newimprovement';
 import SavedImprovement from 'components/ui/savedimprovement';
+import { router } from 'expo-router';
 
 const Suggestions = () => {
   const [saved, setSaved] = useState(false);
@@ -17,6 +18,7 @@ const Suggestions = () => {
         </Text>
         <View style={{ position: 'absolute', top: 0, left: 20 }}>
           <TouchableOpacity
+            onPress={() => router.back()}
             style={{
               backgroundColor: '#82A4A5',
               borderWidth: 1,

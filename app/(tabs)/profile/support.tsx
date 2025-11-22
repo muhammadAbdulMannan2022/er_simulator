@@ -21,6 +21,7 @@ const Support = () => {
         </Text>
         <View style={{ position: 'absolute', top: 0, left: 20 }}>
           <TouchableOpacity
+            onPress={() => router.back()}
             style={{
               backgroundColor: '#82A4A5',
               borderWidth: 1,

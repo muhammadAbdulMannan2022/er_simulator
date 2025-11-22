@@ -3,6 +3,7 @@ import React from 'react';
 import Layout from 'components/layout';
 import { COLORS } from 'constants/color';
 import { CircleCheckBig, X } from 'lucide-react-native';
+import { router } from 'expo-router';
 
 const Subscription = () => {
   return (
@@ -13,6 +14,7 @@ const Subscription = () => {
         </Text>
         <View style={{ position: 'absolute', top: 0, left: 20 }}>
           <TouchableOpacity
+            onPress={() => router.back()}
             style={{
               backgroundColor: '#82A4A5',
               borderWidth: 1,

@@ -24,6 +24,7 @@ const CaseList = () => {
         <View
           style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <TouchableOpacity
+            onPress={() => router.replace('../(tabs)/home')}
             style={{
               backgroundColor: '#82A4A5',
               borderWidth: 1,

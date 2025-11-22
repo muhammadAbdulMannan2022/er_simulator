@@ -7,6 +7,8 @@ import Cardiac from '../../assets/svgs/cardiac.svg';
 import Neuro from '../../assets/svgs/neuro.svg';
 import Toxi from '../../assets/svgs/toxi.svg';
 import Ped from '../../assets/svgs/ped.svg';
+import { router } from 'expo-router';
+// import CaseList from '../../app/others/caselist'
 
 const Treatments = () => {
   return (
@@ -31,6 +33,7 @@ const Treatments = () => {
         }}>
         <View style={{ flex: 1, flexDirection: 'row', gap: 10, marginBottom: 20 }}>
           <TouchableOpacity
+            onPress={() => router.push('/others/caselist')}
             style={{
               flex: 1,
               flexDirection: 'row',
