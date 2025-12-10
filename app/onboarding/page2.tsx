@@ -63,7 +63,7 @@ export default function Page() {
                 <View className="h-3 w-3 rounded-sm border border-[#E0DEDE] bg-transparent"></View>
               </View>
             </View>
-            <Pressable
+            <TouchableOpacity
               onPress={() => router.push('/onboarding/page3')}
               className="absolute -right-1 pt-6"
               style={{ bottom: 150 }}>
@@ -89,7 +89,7 @@ export default function Page() {
                   strokeLinejoin="round"
                 />
               </Svg>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </LinearGradient>
       </View>

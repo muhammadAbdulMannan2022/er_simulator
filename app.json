@@ -4,13 +4,19 @@
     "slug": "ersimulator",
     "version": "1.0.0",
     "scheme": "ersimulator",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
     "experiments": {
       "tsconfigPaths": true
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router"
+    ],
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
@@ -19,28 +25,33 @@
       "resizeMode": "cover",
       "backgroundColor": "#133A3E"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#133A3E"
       },
-      "package": "com.saminyasar004.ersimulator",
-      "bundleIdentifier": "com.saminyasar004.ersimulator"
+      "package": "com.ersimulator.app",
+      "bundleIdentifier": "com.ersimulator.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#133A3E"
       },
-      "package": "com.saminyasar004.ersimulator",
+      "package": "com.ersimulator.app",
       "edgeToEdgeEnabled": true
     },
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "ddcc2120-df98-47f1-aaa7-25e86a95394e"
+        "projectId": "21fcce4f-5adb-4a70-bdf9-9a59da38a424"
       }
     }
   }

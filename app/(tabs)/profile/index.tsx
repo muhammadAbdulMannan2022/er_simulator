@@ -11,6 +11,7 @@ import {
   TriangleAlert,
   EarthLock,
   LogOut,
+  FileQuestionMark,
 } from 'lucide-react-native';
 import Suggession from '../../../assets/svgs/suggestion.svg';
 import Upload from '../../../assets/svgs/upload.svg';
@@ -25,28 +26,17 @@ export default function Index() {
         <Text className="font-roboto font-semibold " style={{ fontSize: 26 }}>
           My Profile
         </Text>
-        {/* <View style={{ position: 'absolute', top: 0, left: 20 }}>
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#82A4A5',
-              borderWidth: 1,
-              borderColor: COLORS.deep,
-              borderRadius: 40,
-              padding: 3,
-            }}>
-            <X size={35} color={'#fff'} />
-          </TouchableOpacity>
-        </View> */}
       </View>
       <View
         style={{
           flexDirection: 'row',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           alignItems: 'center',
           marginTop: 30,
-          gap: 50,
+          // gap: 50,
           backgroundColor: '#DAE8E8',
           paddingVertical: 15,
+          paddingHorizontal: 12,
         }}>
         <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
           <View>
@@ -105,12 +95,12 @@ export default function Index() {
                 elevation: 4,
               }}>
               <Text
-                className="font-roboto text-center font-semibold"
+                className="text-center font-roboto font-semibold"
                 style={{ fontSize: 32, color: '#fff' }}>
                 24
               </Text>
               <Text
-                className="font-roboto text-center font-normal"
+                className="text-center font-roboto font-normal"
                 style={{ fontSize: 16, color: '#fff' }}>
                 Taken{'\n'}Cases
               </Text>
@@ -129,12 +119,12 @@ export default function Index() {
                 elevation: 4,
               }}>
               <Text
-                className="font-roboto text-center font-semibold"
+                className="text-center font-roboto font-semibold"
                 style={{ fontSize: 32, color: '#40464B' }}>
                 4
               </Text>
               <Text
-                className="font-roboto text-center font-normal"
+                className="text-center font-roboto font-normal"
                 style={{ fontSize: 16, color: '#40464B' }}>
                 Favorite{'\n'}Cases
               </Text>
@@ -153,12 +143,12 @@ export default function Index() {
                 elevation: 4,
               }}>
               <Text
-                className="font-roboto text-center font-semibold"
+                className="text-center font-roboto font-semibold"
                 style={{ fontSize: 32, color: '#fff' }}>
                 89%
               </Text>
               <Text
-                className="font-roboto text-center font-normal"
+                className="text-center font-roboto font-normal"
                 style={{ fontSize: 16, color: '#fff' }}>
                 Average{'\n'}Score
               </Text>
@@ -325,6 +315,27 @@ export default function Index() {
               <CircleQuestionMark color={'#163A53'} size={20} />
               <Text className="font-roboto font-normal" style={{ fontSize: 20, color: '#163A53' }}>
                 My CME Certificates
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => router.push('/profile/faq')}
+              style={{
+                flexDirection: 'row',
+                backgroundColor: '#fff',
+                paddingHorizontal: 20,
+                paddingVertical: 17,
+                borderRadius: 10,
+                gap: 10,
+                alignItems: 'center',
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.2,
+                shadowRadius: 3,
+                elevation: 4,
+              }}>
+              <FileQuestionMark color={'#163A53'} size={20} />
+              <Text className="font-roboto font-normal" style={{ fontSize: 20, color: '#163A53' }}>
+                FAQ
               </Text>
             </TouchableOpacity>
             <TouchableOpacity

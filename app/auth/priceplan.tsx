@@ -24,6 +24,10 @@ import Successful from '../../assets/svgs/successful.svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Green from '../../assets/svgs/greenbatch.svg';
 import Red from '../../assets/svgs/redbatch.svg';
+import Stater from 'components/plan/stater';
+import Core from 'components/plan/core';
+import Pro from 'components/plan/pro';
+import SummitPlan from 'components/plan/summitplan';
 
 export default function PlanPrice() {
   const router = useRouter();
@@ -66,7 +70,7 @@ export default function PlanPrice() {
                 </View>
 
                 <Text className="text-3xl font-semibold text-[#fff]">Choose Your Plan</Text>
-                <Text className="text-grayText mb-2 w-[80%] text-center text-xl font-normal">
+                <Text className="mb-2 w-[80%] text-center text-xl font-normal text-grayText">
                   Start learning with flexible options
                 </Text>
 
@@ -76,202 +80,10 @@ export default function PlanPrice() {
                     width: '100%',
                     alignItems: 'center',
                   }}>
-                  <View
-                    style={{
-                      backgroundColor: '#142629',
-                      width: '95%',
-                      borderRadius: 10,
-                      padding: 15,
-                      alignItems: 'center',
-                      borderWidth: 1,
-                      borderColor: '#579D97',
-                      marginBottom: 20,
-                    }}>
-                    {/* <Text style={styles.text}>Gradient Border ✨</Text> */}
-                    <View style={{ flex: 1, width: '100%' }}>
-                      <View
-                        style={{
-                          flex: 1,
-                          backgroundColor: COLORS.bgdeep,
-                          paddingHorizontal: 20,
-                          paddingVertical: 10,
-                          borderRadius: 10,
-                          marginBottom: 15,
-                        }}>
-                        <Text className="font-roboto mb-2 text-[22px] font-medium text-white">
-                          Free Trial
-                        </Text>
-                        <Text className="font-roboto mb-2 text-[16px] font-normal text-[#C2C2C2]">
-                          Try Before You Commit
-                        </Text>
-                        <View className="flex-row items-end">
-                          <Text className="font-roboto mb-2 text-[26px] font-bold text-[#10A9B3]">
-                            Free
-                          </Text>
-                          <Text className="font-roboto mb-2 text-[16px] font-normal text-[#10A9B3]">
-                            {' '}
-                            / 30 Days
-                          </Text>
-                        </View>
-                      </View>
-                      <View className="pl-5">
-                        <View className="mb-3 flex-row items-center gap-2">
-                          <CircleCheckBig color={'white'} size={20} />
-                          <Text className="font-roboto  text-[14px] font-normal text-white">
-                            Up to 5 Simulation
-                          </Text>
-                        </View>
-                        <View className="mb-3 flex-row items-center gap-2">
-                          <CircleCheckBig color={'white'} size={20} />
-                          <Text className="font-roboto  text-[14px] font-normal text-white">
-                            AI Voice Interactions
-                          </Text>
-                        </View>
-                        <View className="mb-3 flex-row items-center gap-2">
-                          <CircleCheckBig color={'white'} size={20} />
-                          <Text className="font-roboto  text-[14px] font-normal text-white">
-                            Basic Feedback
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      backgroundColor: COLORS.bglight,
-                      width: '95%',
-                      borderRadius: 10,
-                      padding: 15,
-                      alignItems: 'center',
-                      borderWidth: 1,
-                      borderColor: '#579D97',
-                      marginBottom: 20,
-                    }}>
-                    {/* <Text style={styles.text}>Gradient Border ✨</Text> */}
-                    <View style={{ flex: 1, width: '100%' }}>
-                      <View
-                        style={{
-                          flex: 1,
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          backgroundColor: COLORS.bgdeep,
-                          paddingHorizontal: 20,
-                          paddingVertical: 10,
-                          borderRadius: 10,
-                          marginBottom: 15,
-                        }}>
-                        <View>
-                          <Text className="font-roboto mb-2 text-[22px] font-medium text-white">
-                            Monthly Access
-                          </Text>
-                          <Text className="font-roboto mb-2 text-[16px] font-normal text-[#C2C2C2]">
-                            Unlimited simulations
-                          </Text>
-                          <View className="flex-row items-end">
-                            <Text className="font-roboto mb-2 text-[26px] font-bold text-[#10A9B3]">
-                              $19.99
-                            </Text>
-                            <Text className="font-roboto mb-2 text-[16px] font-normal text-[#10A9B3]">
-                              {' '}
-                              / 30 Days
-                            </Text>
-                          </View>
-                        </View>
-                        <View>
-                          <Red />
-                        </View>
-                      </View>
-                      <View className="pl-5">
-                        <View className="mb-3 flex-row items-center gap-2">
-                          <CircleCheckBig color={'white'} size={20} />
-                          <Text className="font-roboto  text-[14px] font-normal text-white">
-                            Unlimited simulations
-                          </Text>
-                        </View>
-                        <View className="mb-3 flex-row items-center gap-2">
-                          <CircleCheckBig color={'white'} size={20} />
-                          <Text className="font-roboto  text-[14px] font-normal text-white">
-                            All difficulty levels
-                          </Text>
-                        </View>
-                        <View className="mb-3 flex-row items-center gap-2">
-                          <CircleCheckBig color={'white'} size={20} />
-                          <Text className="font-roboto  text-[14px] font-normal text-white">
-                            All difficulty levels
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      backgroundColor: '#142629',
-                      width: '95%',
-                      borderRadius: 10,
-                      padding: 15,
-                      alignItems: 'center',
-                      borderWidth: 1,
-                      borderColor: '#579D97',
-                      marginBottom: 20,
-                    }}>
-                    {/* <Text style={styles.text}>Gradient Border ✨</Text> */}
-                    <View style={{ flex: 1, width: '100%' }}>
-                      <View
-                        style={{
-                          flex: 1,
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          backgroundColor: COLORS.bgdeep,
-                          paddingHorizontal: 20,
-                          paddingVertical: 10,
-                          borderRadius: 10,
-                          marginBottom: 15,
-                        }}>
-                        <View>
-                          <Text className="font-roboto mb-2 text-[22px] font-medium text-white">
-                            CME Certified
-                          </Text>
-                          <Text className="font-roboto mb-2 text-[16px] font-normal text-[#C2C2C2]">
-                            Earn CME credits
-                          </Text>
-                          <View className="flex-row items-end">
-                            <Text className="font-roboto mb-2 text-[26px] font-bold text-[#10A9B3]">
-                              $499
-                            </Text>
-                            <Text className="font-roboto mb-2 text-[16px] font-normal text-[#10A9B3]">
-                              {' '}
-                              / year
-                            </Text>
-                          </View>
-                        </View>
-                        <View>
-                          <Green />
-                        </View>
-                      </View>
-                      <View className="pl-5">
-                        <View className="mb-3 flex-row items-center gap-2">
-                          <CircleCheckBig color={'white'} size={20} />
-                          <Text className="font-roboto  text-[14px] font-normal text-white">
-                            Everything in Monthly
-                          </Text>
-                        </View>
-                        <View className="mb-3 flex-row items-center gap-2">
-                          <CircleCheckBig color={'white'} size={20} />
-                          <Text className="font-roboto  text-[14px] font-normal text-white">
-                            Unlimited CME credits
-                          </Text>
-                        </View>
-                        <View className="mb-3 flex-row items-center gap-2">
-                          <CircleCheckBig color={'white'} size={20} />
-                          <Text className="font-roboto  text-[14px] font-normal text-white">
-                            Official certificates
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
+                  <Stater />
+                  <Core />
+                  <Pro />
+                  <SummitPlan />
                 </View>
                 <View style={{ width: '95%', marginTop: 5, marginBottom: 20 }}>
                   <TouchableOpacity
@@ -285,7 +97,7 @@ export default function PlanPrice() {
                       borderRadius: 10,
                     }}>
                     <Text
-                      className="font-roboto text-center text-[20px] font-bold text-white"
+                      className="text-center font-roboto text-[20px] font-bold text-white"
                       style={{ paddingVertical: 15 }}>
                       Skip for now
                     </Text>

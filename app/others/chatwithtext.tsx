@@ -120,6 +120,27 @@ const ChatWithText = () => {
             </View>
           </View>
         </SafeAreaView>
+        <View style={{ width: '90%', alignSelf: 'center', marginTop: -10 }}>
+          <LinearGradient
+            colors={['#800300', '#FF1B00', '#FF7F00', '#FFC500', '#FFC500', '#62A300']}
+            locations={[0, 0.22, 0.42, 0.62, 0.83, 1]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={{ height: 16, borderRadius: 20, borderWidth: 3, borderColor: '#10818E' }}
+          />
+          <View
+            style={{
+              width: 30,
+              backgroundColor: '#e9e8e8',
+              position: 'absolute',
+              height: 10,
+              margin: 3,
+              borderRadius: 20,
+              left: '60%',
+            }}
+          />
+        </View>
+
         <KeyboardAvoidingView
           style={{ flex: 1 }}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
