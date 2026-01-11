@@ -15,6 +15,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   useWindowDimensions,
+  Switch,
 } from 'react-native';
 import Google from '../../assets/svgs/google.svg';
 import Apple from '../../assets/svgs/apple.svg';
@@ -84,10 +85,13 @@ export default function Page() {
                 />
               </View>
               <View className="w-full flex-row justify-between">
+               <View className="flex flex-row items-center gap-2">
+               <Switch className="ml-2" />
                 <Text className="text-lg font-light text-white ">Remember Me</Text>
+                </View>
                 <TouchableOpacity
                   onPress={() => {
-                    router.push('/auth/forgotpass');
+                     router.push('/auth/forgotpass');
                   }}>
                   <Text className="text-lg font-medium text-[#D62E2F] underline">
                     Forgot Password?

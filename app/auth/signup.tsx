@@ -67,7 +67,7 @@ export default function SignUp() {
                   Join Thousands of Medical Professionals
                 </Text>
                 <Text className="text-grayText mb-2 text-xl font-normal">
-                  Sign Up to continue your training
+                  Join thousands of medical professionals
                 </Text>
 
                 <View className="flex h-auto w-full flex-col gap-4">
@@ -104,6 +104,9 @@ export default function SignUp() {
                     control={dummyForm.control}
                     errors={{}}
                     icon="LockKeyhole"
+                     secureTextEntry={true}
+                     eyeIcon={true}
+                     
                   />
                   <InputForm
                     title={'specialty'}

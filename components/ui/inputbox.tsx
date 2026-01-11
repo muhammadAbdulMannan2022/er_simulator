@@ -13,11 +13,12 @@ type Props<T> = {
   errors: FieldErrors<T>;
   keyboardType?: 'default' | 'email-address' | 'numeric' | 'number-pad';
   icon: string;
+  padding?: number;
 };
 
-const InputBox = ({ title, placeHolder, control, errors, keyboardType = 'default' }: Props) => {
+const InputBox = ({ title, placeHolder, control, errors, keyboardType = 'default', padding = 30 }: Props) => {
   return (
-    <View style={{ marginVertical: 30, width: '100%' }}>
+    <View style={{ marginVertical: padding, width: '100%' }}>
       <Controller
         control={control}
         name={title}

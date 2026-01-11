@@ -1,5 +1,6 @@
+import Link from 'expo-router/link';
 import Layout from 'components/layout';
-import { Text, View, Image, Pressable, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { Text, View, Image, Pressable, TouchableOpacity, TouchableHighlight, Animated, PanResponder } from 'react-native';
 import Heartbit from '../../../assets/svgs/heartbit.svg';
 import { Heart } from 'lucide-react-native';
 import InputBox from 'components/ui/inputbox';
@@ -12,7 +13,7 @@ import CardWithBar from 'components/ui/cardwithbar';
 import Trauma from '../../../assets/svgs/trauma.svg';
 import Treatments from 'components/ui/treatments';
 import CardWithBox from 'components/ui/cardwithbox';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'expo-router';
 
 export default function Index() {
@@ -20,6 +21,32 @@ export default function Index() {
   const [guest, useGuest] = useState(false);
 
   const router = useRouter();
+
+  const [isBeastMode, setIsBeastMode] = useState(false);
+  const [sliderWidth, setSliderWidth] = useState(0);
+  // Initialize pan with value 0
+  const pan = useRef(new Animated.Value(0)).current;
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => {
+        // Set offset to current value to continue gesture from where it left off
+        pan.setOffset(pan._value);
+        pan.setValue(0);
+      },
+      onPanResponderMove: Animated.event([null, { dx: pan }], {
+        useNativeDriver: false,
+      }),
+      onPanResponderRelease: () => {
+        pan.flattenOffset();
+        // Clamp value between 0 and slider width (minus knob width)
+        const maxVal = Math.max(0, sliderWidth - 24);
+        if (pan._value < 0) pan.setValue(0);
+        else if (pan._value > maxVal) pan.setValue(maxVal);
+      },
+    })
+  ).current;
 
   return (
     <Layout>
@@ -54,14 +81,15 @@ export default function Index() {
             </View>
           </View>
         </View>
-        <Text className="font-roboto text-xl font-normal text-gray-700 ">
-          Countinue your training
+        <Text className="font-roboto text-xl font-normal text-gray-700">
+          Continue your training
         </Text>
         <InputBox
           title={'email'}
           placeHolder={'Search Cases...'}
           control={dummyForm.control}
           errors={{}}
+          padding={16}
         />
 
         {guest ? <CardWithBox /> : <CardWithBar />}
@@ -71,43 +99,105 @@ export default function Index() {
           <View style={{ flexDirection: 'row', gap: 10, marginVertical: 12 }}>
             <View
               style={{
-                flex: 1,
-                backgroundColor: COLORS.deep,
+                flex: 2.5,
+                borderColor: COLORS.deep,
+                borderWidth: 1,
                 borderRadius: 6,
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.4,
-                shadowRadius: 3,
-                elevation: 5,
+                paddingHorizontal: 15,
+                paddingVertical: 12,
+                justifyContent: 'center',
               }}>
-              <Text className="py-3 text-center text-lg font-bold text-white ">Beginner</Text>
+              <View
+                style={{ height: 30, justifyContent: 'center' }}
+                onLayout={(e) => setSliderWidth(e.nativeEvent.layout.width)}>
+                <View
+                  style={{
+                    height: 10,
+                    backgroundColor: '#E6E8EA',
+                    borderRadius: 5,
+                    width: '100%',
+                  }}
+                />
+                <Animated.View
+                  {...panResponder.panHandlers}
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    height: 24,
+                    width: 24,
+                    borderRadius: 12,
+                    backgroundColor: 'white',
+                    borderWidth: 2.5,
+                    borderColor: COLORS.deep,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    transform: [
+                      {
+                        translateX: pan.interpolate({
+                          inputRange: [0, Math.max(1, sliderWidth - 24)],
+                          outputRange: [0, Math.max(1, sliderWidth - 24)],
+                          extrapolate: 'clamp',
+                        }),
+                      },
+                    ],
+                  }}>
+                  <View
+                    style={{
+                      height: 8,
+                      width: 8,
+                      borderRadius: 4,
+                      backgroundColor: COLORS.deep,
+                    }}
+                  />
+                </Animated.View>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginTop: 2,
+                }}>
+                <Text
+                  style={{
+                    color: COLORS.deep,
+                    fontWeight: '700',
+                    fontSize: 13,
+                  }}>
+                  Beginner
+                </Text>
+                <Text
+                  style={{
+                    color: '#40464B',
+                    fontWeight: '700',
+                    fontSize: 13,
+                  }}>
+                  Try Me
+                </Text>
+              </View>
             </View>
-            <View
+
+            <Pressable
+              onPress={() => setIsBeastMode(!isBeastMode)}
               style={{
                 flex: 1,
-                backgroundColor: '#CFCFCF',
+                backgroundColor: isBeastMode ? COLORS.orgbtn : '#CFCFCF',
                 borderRadius: 6,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingHorizontal: 5,
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.4,
                 shadowRadius: 3,
                 elevation: 5,
               }}>
-              <Text className="py-3 text-center text-lg font-bold text-[#40464B] ">Try Me</Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: '#CFCFCF',
-                borderRadius: 6,
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.4,
-                shadowRadius: 3,
-                elevation: 5,
-              }}>
-              <Text className="py-3 text-center text-lg font-bold text-[#40464B] ">Beast Mode</Text>
-            </View>
+              <Text
+                className="text-center font-bold"
+                style={{ fontSize: 15, color: isBeastMode ? 'white' : '#40464B' }}>
+                Beast{'\n'}Mode
+              </Text>
+            </Pressable>
           </View>
         </View>
         <View style={{ flexDirection: 'row', gap: 15, marginVertical: 20 }}>
