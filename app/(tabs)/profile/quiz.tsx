@@ -4,8 +4,6 @@ import Layout from 'components/layout';
 import { COLORS } from 'constants/color';
 import Hat from '../../../assets/svgs/hat.svg';
 import { Bookmark, Play, Plus, Save, X } from 'lucide-react-native';
-import NewImprovement from 'components/ui/newimprovement';
-import SavedImprovement from 'components/ui/savedimprovement';
 import { useRouter } from 'expo-router';
 
 const Quiz = () => {
@@ -16,7 +14,7 @@ const Quiz = () => {
     <Layout>
       <View style={{ justifyContent: 'center', alignItems: 'center', height: 35, marginTop: 20 }}>
         <Text className="font-roboto font-semibold " style={{ fontSize: 26 }}>
-          My CME QUIZ
+          My QUIZ
         </Text>
         <View style={{ position: 'absolute', top: 0, left: 20 }}>
           <TouchableOpacity

@@ -2,13 +2,8 @@ import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 import React, { useState } from 'react';
 import Layout from 'components/layout';
 import { COLORS } from 'constants/color';
-import Hat from '../../../assets/svgs/hat.svg';
 import { Bookmark, Play, Plus, Save, User, ChevronLeft } from 'lucide-react-native';
-import NewImprovement from 'components/ui/newimprovement';
-import SavedImprovement from 'components/ui/savedimprovement';
 import { useRouter } from 'expo-router';
-import { Input } from 'components/input';
-import Camera from '../../../assets/svgs/camera.svg';
 
 const EditProfile = () => {
   const router = useRouter();
@@ -134,7 +129,7 @@ const EditProfile = () => {
             <Text
               className="font-roboto font-semibold"
               style={{ fontSize: 16, marginBottom: 6, color: '#333' }}>
-              Specialist
+              Field of Practice
             </Text>
 
             <TextInput
@@ -148,7 +143,7 @@ const EditProfile = () => {
                 fontSize: 16,
                 color: '#000',
               }}
-              placeholder="+1 123 456 7890"
+              placeholder="Emergency Medicine"
               placeholderTextColor="#999"
             />
           </View>

@@ -1,9 +1,16 @@
-import { View, Text, TouchableOpacity } from 'react-native';
-import React from 'react';
+import { View, Text, TouchableOpacity, LayoutAnimation, Platform, UIManager } from 'react-native';
+import React, { useState } from 'react';
 import { COLORS } from 'constants/color';
 import { LinearGradient } from 'expo-linear-gradient';
 import Point from '../../assets/svgs/point.svg';
 import { getGradientColorAt } from 'utils/gradientcolor';
+import { AlertCircle, ChevronDown, ChevronUp } from 'lucide-react-native';
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 const gradientStops = [
   { stop: 0, color: '#152CAF' },
@@ -15,142 +22,201 @@ const gradientStops = [
 ];
 
 const ProgressCard = ({ serial, complete }) => {
+  const [expanded, setExpanded] = useState(false);
   const color = getGradientColorAt(0.6, gradientStops);
-  console.log(color);
+
+  const toggleExpand = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setExpanded(!expanded);
+  };
+
+  const actions = [
+    'Check oxygen saturation before administering supplemental oxygen.',
+    'Check oxygen saturation before administering supplemental oxygen.',
+    'Check oxygen saturation before administering supplemental oxygen.',
+  ];
 
   return (
-    <View
-      style={{ flex: 1, backgroundColor: complete ? COLORS.deep : '#5E7077', borderRadius: 12 }}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginTop: 15,
-          marginHorizontal: 10,
-          alignItems: 'center',
-        }}>
-        <View style={{}}>
-          <Text
-            className="font-roboto  text-sm font-semibold"
-            style={{
-              backgroundColor: '#fff',
-              paddingVertical: 1,
-              paddingHorizontal: 15,
-              borderRadius: 10,
-            }}>
-            {serial}
-          </Text>
-        </View>
-        <Text className="font-roboto text-lg font-semibold text-white">100% Complete</Text>
-      </View>
-      <View style={{ paddingHorizontal: 12, paddingVertical: 20 }}>
-        <Text className="font-roboto text-2xl font-semibold text-white">
-          Acute MI with Cardiogenic Shock
-        </Text>
-        <Text className="font-roboto text-lg font-normal text-white">
-          58-year-old male presenting with chest pain and hypotension...
-        </Text>
+    <View style={{ backgroundColor: 'white', borderRadius: 12, overflow: 'hidden' }}>
+      {/* Ribbon Serial */}
+      <View style={{ position: 'absolute', top: 0, left: 20, zIndex: 10 }}>
         <View
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 10,
-            paddingTop: 10,
-            paddingBottom: 20,
+            backgroundColor: '#fff',
+            paddingHorizontal: 12,
+            paddingBottom: 8,
+            paddingTop: 0,
+            borderBottomLeftRadius: 4,
+            borderBottomRightRadius: 4,
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.1,
+            shadowRadius: 2,
+            elevation: 3,
           }}>
-          <View
-            style={{
-              flex: 1,
+          <Text className="font-roboto text-lg font-bold text-black">{serial}</Text>
+        </View>
+        {/* Triangle cutout effect for ribbon usually needs SVG or complex borders, simplifying to a tag for now */}
+      </View>
 
-              // Shadow for iOS + elevation for Android
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 4 },
-              shadowOpacity: 0.2,
-              shadowRadius: 4,
-              elevation: 6,
-            }}>
-            <LinearGradient
-              colors={['#152CAF', '#0D2780', '#133A75', '#377FA9', '#2FA4B3', '#2EABB5']}
-              locations={[0, 0.18, 0.41, 0.68, 0.95, 1]}
-              style={{
-                width: '90%',
-                height: 22,
-                borderRadius: 10,
-                borderWidth: 3,
-                borderColor: '#fff',
-              }}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            />
-            <Point
-              style={{
-                position: 'absolute',
-                top: 19,
-                left: 5 + 130,
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.3,
-                shadowRadius: 3,
-                elevation: 5,
-              }}
-              fill={color}
-            />
-            <View
-              style={{
-                position: 'absolute',
-                top: 38,
-                left: 4 + 118,
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 3 },
-                shadowOpacity: 0,
-                shadowRadius: 4,
-                elevation: 5,
-              }}>
+      {/* Main Card Content */}
+      <View
+        style={{
+          backgroundColor: '#447070', // Matching the teal/slate color from screenshot
+          paddingTop: 45, // Space for ribbon
+          paddingHorizontal: 15,
+          paddingBottom: 20,
+          borderTopLeftRadius: 12,
+          borderTopRightRadius: 12,
+        }}>
+        {/* Top Right Status */}
+        <View style={{ position: 'absolute', top: 15, right: 15 }}>
+          <Text className="font-roboto text-xs font-medium text-white">
+            {complete ? '100% Complete' : '50% Complete'}
+          </Text>
+        </View>
+
+        <Text className="font-roboto text-xl font-bold text-white mb-1">
+          Acute MI With Cardiogenic Shock
+        </Text>
+        <Text className="font-roboto text-sm text-gray-200 mb-6">
+          58-Year-Old Male Presenting With Chest Pain And Hypotension...
+        </Text>
+
+        {/* Progress Section */}
+        <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 10 }}>
+          <View style={{ flex: 1, marginBottom: 5 }}>
+            {/* Custom Progress Bar */}
+            <View style={{ height: 18, justifyContent: 'center' }}>
               <View
                 style={{
-                  paddingRight: 5,
-                  paddingLeft: 10,
-                  paddingVertical: 2,
-                  borderRadius: 10,
-                  backgroundColor: color,
+                  height: 12,
+                  backgroundColor: 'rgba(255,255,255,0.2)',
+                  borderRadius: 6,
+                  overflow: 'hidden',
+                  width: '100%',
                   borderWidth: 1,
-                  borderColor: '#fff',
+                  borderColor: 'white',
                 }}>
-                <Text
+                <LinearGradient
+                  colors={['#152CAF', '#2EABB5']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={{ width: complete ? '100%' : '50%', height: '100%' }}
+                />
+              </View>
+
+              {/* Knob */}
+              <View
+                style={{
+                  position: 'absolute',
+                  left: complete ? '96%' : '46%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <View
                   style={{
-                    color: '#fff',
-                    fontWeight: '900',
-                    fontSize: 12,
+                    backgroundColor: '#2FA4B3',
+                    paddingHorizontal: 8,
+                    paddingVertical: 2,
+                    borderRadius: 10,
+                    marginTop: 20, // Position below the bar
                   }}>
-                  55%
-                </Text>
+                  <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>
+                    {complete ? '100 %' : '50 %'}
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
+
+          {/* Action Button */}
           <TouchableOpacity
             style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 3 },
-              shadowOpacity: 0.5,
-              shadowRadius: 5,
-              elevation: 5,
+              backgroundColor: complete ? '#579D97' : COLORS.orgbtn,
+              paddingHorizontal: 20,
+              paddingVertical: 8,
+              borderRadius: 6,
+              marginLeft: 10,
             }}>
-            <Text
-              className="font-roboto text-lg font-semibold text-white"
-              style={{
-                // paddingHorizontal: complete ? 18 : 22,
-                textAlign: 'center',
-                width: 100,
-                paddingVertical: 5,
-                backgroundColor: complete ? '#579D97' : COLORS.orgbtn,
-                borderWidth: 1,
-                borderColor: complete ? '#579D97' : COLORS.orgbtn,
-                borderRadius: 8,
-              }}>
+            <Text className="font-roboto text-sm font-semibold text-white">
               {complete ? 'Completed' : 'Resume'}
             </Text>
           </TouchableOpacity>
         </View>
+      </View>
+
+      {/* Expandable Footer */}
+      <View>
+        <TouchableOpacity
+          onPress={toggleExpand}
+          activeOpacity={0.7}
+          style={{
+            backgroundColor: 'white',
+            paddingVertical: 12,
+            paddingHorizontal: 15,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            borderBottomLeftRadius: 12,
+            borderBottomRightRadius: 12,
+          }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+            <AlertCircle size={20} color={COLORS.orgbtn} />
+            <Text className="font-roboto text-sm font-medium text-gray-700">
+              Actions to Reconsider
+            </Text>
+            <View
+              style={{
+                backgroundColor: '#FFE5D3',
+                paddingHorizontal: 8,
+                paddingVertical: 2,
+                borderRadius: 10,
+              }}>
+              <Text style={{ color: COLORS.orgbtn, fontSize: 10, fontWeight: 'bold' }}>3</Text>
+            </View>
+          </View>
+          {expanded ? (
+            <ChevronUp size={20} color="#9CA3AF" />
+          ) : (
+            <ChevronDown size={20} color="#9CA3AF" />
+          )}
+        </TouchableOpacity>
+
+        {/* Expanded Content */}
+        {expanded && (
+          <View style={{ backgroundColor: '#F3F4F6', padding: 15, gap: 10 }}>
+            {actions.map((action, index) => (
+              <View
+                key={index}
+                style={{
+                  backgroundColor: 'white',
+                  padding: 12,
+                  borderRadius: 8,
+                  flexDirection: 'row',
+                  gap: 10,
+                  shadowColor: '#000',
+                  shadowOffset: { width: 0, height: 1 },
+                  shadowOpacity: 0.05,
+                  shadowRadius: 2,
+                  elevation: 1,
+                }}>
+                <View
+                  style={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: 3,
+                    backgroundColor: COLORS.orgbtn,
+                    marginTop: 6,
+                  }}
+                />
+                <Text className="font-roboto text-xs text-gray-600 flex-1 leading-5">
+                  {action}
+                </Text>
+              </View>
+            ))}
+          </View>
+        )}
       </View>
     </View>
   );
