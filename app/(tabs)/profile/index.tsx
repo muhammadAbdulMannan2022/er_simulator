@@ -195,6 +195,7 @@ export default function Index() {
               Upload Simulations
             </Text>
           </TouchableOpacity>
+          <Text style={{ textAlign: 'center' }}>( 24H processing if approved )</Text>
           <TouchableOpacity
             onPress={() => router.push('/profile/quiz')}
             style={{
@@ -314,7 +315,7 @@ export default function Index() {
               }}>
               <CircleQuestionMark color={'#163A53'} size={20} />
               <Text className="font-roboto font-normal" style={{ fontSize: 20, color: '#163A53' }}>
-                My CME Certificates
+                My Learning Certificates
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
