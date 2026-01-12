@@ -20,13 +20,15 @@ import {
 import Google from '../../assets/svgs/google.svg';
 import Apple from '../../assets/svgs/apple.svg';
 import { KeyboardAwareScrollView, WindowDimensionsEvents } from 'react-native-keyboard-controller';
+import { useState } from 'react';
 
 export default function Page() {
   const router = useRouter();
-
   const { height } = useWindowDimensions();
-
   const dummyForm = useForm();
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   return (
     <>
@@ -86,7 +88,15 @@ export default function Page() {
               </View>
               <View className="w-full flex-row justify-between">
                <View className="flex flex-row items-center gap-2">
-               <Switch className="ml-2" />
+                <Switch
+                    className="ml-2"
+                    trackColor={{ false: '#767577', true: COLORS.button }}
+                    thumbColor={isEnabled ? COLORS.offWhite : '#f4f3f4'}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
+                    style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
+                  />
                 <Text className="text-lg font-light text-white ">Remember Me</Text>
                 </View>
                 <TouchableOpacity

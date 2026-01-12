@@ -215,7 +215,7 @@ export default function Index() {
             }}>
             <Question />
             <Text className="font-roboto font-medium" style={{ fontSize: 20, color: '#fff' }}>
-              My CME QUIZ
+              My QUIZ
             </Text>
             <View
               style={{
