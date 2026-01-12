@@ -1,6 +1,7 @@
 import Layout from 'components/layout';
 import { COLORS } from 'constants/color';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View, Modal } from 'react-native';
+import React, { useState } from 'react';
 import {
   X,
   CreditCard,
@@ -19,6 +20,7 @@ import Question from '../../../assets/svgs/question.svg';
 import { useRouter } from 'expo-router';
 
 export default function Index() {
+  const [modalVisible, setModalVisible] = useState(false);
   const router = useRouter();
   return (
     <Layout>
@@ -404,6 +406,7 @@ export default function Index() {
         </View>
         <View style={{ marginBottom: 60, flex: 1 }}>
           <TouchableOpacity
+            onPress={() => setModalVisible(true)}
             style={{
               width: '100%',
               flexDirection: 'row',
@@ -427,6 +430,89 @@ export default function Index() {
           </TouchableOpacity>
         </View>
       </View>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            backgroundColor: COLORS.bgdeep + 'AA',
+          }}>
+          <View
+            style={{
+              width: '100%',
+              backgroundColor: 'white',
+              borderRadius: 20,
+              paddingBottom: 60,
+              padding: 25,
+              alignItems: 'center',
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 4,
+              elevation: 5,
+            }}>
+            <Text
+              className="font-roboto font-bold"
+              style={{ fontSize: 24, color: '#163A53', marginBottom: 15 }}>
+              Log Out
+            </Text>
+            <Text
+              className="font-roboto"
+              style={{
+                fontSize: 16,
+                color: '#40464B',
+                textAlign: 'center',
+                marginBottom: 30,
+              }}>
+              Are you sure you want to Log out?
+            </Text>
+            <View style={{ flexDirection: 'row', gap: 15, width: '100%' }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(false);
+                  // Add actual logout logic here
+                  router.replace('/auth/login');
+                }}
+                style={{
+                  flex: 1,
+                  backgroundColor: '#D24B4B',
+                  paddingVertical: 12,
+                  borderRadius: 10,
+                  alignItems: 'center',
+                }}>
+                <Text
+                  className="font-roboto font-bold"
+                  style={{ fontSize: 16, color: 'white' }}>
+                  Log Out
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setModalVisible(false)}
+                style={{
+                  flex: 1,
+                  backgroundColor: '#E5E7EB',
+                  paddingVertical: 12,
+                  borderRadius: 10,
+                  alignItems: 'center',
+                }}>
+                <Text
+                  className="font-roboto font-bold"
+                  style={{ fontSize: 16, color: '#4B5563' }}>
+                  Cancel
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </Layout>
   );
 }
