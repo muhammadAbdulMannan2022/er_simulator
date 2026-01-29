@@ -1,11 +1,6 @@
-import { Input } from 'components/input';
-
-import InputForm from 'components/ui/inputform';
-import { Layout } from 'components/ui/layout';
 import { COLORS } from 'constants/color';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { CircleCheckBig } from 'lucide-react-native';
 import { useForm } from 'react-hook-form';
 import {
   Image,
@@ -17,24 +12,26 @@ import {
   useWindowDimensions,
   StyleSheet,
 } from 'react-native';
-import Google from '../../assets/svgs/google.svg';
-import Apple from '../../assets/svgs/apple.svg';
 import { KeyboardAwareScrollView, WindowDimensionsEvents } from 'react-native-keyboard-controller';
-import Successful from '../../assets/svgs/successful.svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Green from '../../assets/svgs/greenbatch.svg';
-import Red from '../../assets/svgs/redbatch.svg';
 import Stater from 'components/plan/stater';
 import Core from 'components/plan/core';
 import Pro from 'components/plan/pro';
 import SummitPlan from 'components/plan/summitplan';
+import { Button } from 'components/ui/button';
+import FloatSheet from 'components/ui/float-sheet';
+import { useState } from 'react';
 
 export default function PlanPrice() {
   const router = useRouter();
-
   const { height } = useWindowDimensions();
+    const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
+    const [selected, setSelected] = useState<string | null>(null);
 
-  const dummyForm = useForm();
+    const handleSelectOption = (option: string) => {
+    setSelected(option);
+    setBottomSheetVisible(false);
+  };
 
   return (
     <>
@@ -85,7 +82,7 @@ export default function PlanPrice() {
                   <Pro />
                   <SummitPlan />
                 </View>
-                <View style={{ width: '95%', marginTop: 5, marginBottom: 20 }}>
+                <View style={{ width: '95%', marginTop: 5, marginBottom: 20, gap: 18 }}>
                   <TouchableOpacity
                     onPress={() => {
                       router.push('/(tabs)/home');
@@ -99,10 +96,21 @@ export default function PlanPrice() {
                     <Text
                       className="text-center font-roboto text-[20px] font-bold text-white"
                       style={{ paddingVertical: 15 }}>
-                      Skip for now
+                      GET 1 MONTH FREE
                     </Text>
                   </TouchableOpacity>
+                  <Button onPress={() => {}} variant="destructive_outline" onPressIn={() => setBottomSheetVisible(true)}>
+                    Need More?
+                  </Button>
                 </View>
+
+                <FloatSheet
+                  visible={isBottomSheetVisible}
+                  onClose={() => setBottomSheetVisible(false)}
+                  title={'Emergen'}
+                  options={['A', 'B', 'C', 'D']}
+                  onSelect={handleSelectOption}
+                />
               </View>
             </KeyboardAwareScrollView>
           </SafeAreaView>

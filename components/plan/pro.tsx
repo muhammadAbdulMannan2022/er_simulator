@@ -169,19 +169,6 @@ const Pro = () => {
                   <Text className="mb-2 font-roboto text-[14px] font-normal text-[#C2C2C2]">
                     User | Month
                   </Text>
-                  <View
-                    style={{
-                      backgroundColor: '#016449',
-                      paddingHorizontal: 6,
-                      paddingVertical: 4,
-                      alignItems: 'flex-start',
-                      justifyContent: 'flex-start',
-                      borderRadius: 10,
-                    }}>
-                    <Text className=" font-roboto text-[12px] font-medium text-white">
-                      1 Month Free
-                    </Text>
-                  </View>
                 </View>
               </View>
             </View>
