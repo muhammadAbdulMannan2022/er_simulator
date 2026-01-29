@@ -1,12 +1,8 @@
-import { Input } from 'components/input';
-
 import InputForm from 'components/ui/inputform';
 import InputFormHalf from 'components/ui/inputformhalf';
-import { Layout } from 'components/ui/layout';
 import { COLORS } from 'constants/color';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { Lock, Mail } from 'lucide-react-native';
 import { useForm } from 'react-hook-form';
 import {
   Image,
@@ -106,7 +102,7 @@ export default function SignUp() {
                     icon="LockKeyhole"
                      secureTextEntry={true}
                      eyeIcon={true}
-                     
+                     password
                   />
                   <InputForm
                     title={'specialty'}

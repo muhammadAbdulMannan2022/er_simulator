@@ -1,11 +1,7 @@
-import { Input } from 'components/input';
-
 import InputForm from 'components/ui/inputform';
-import { Layout } from 'components/ui/layout';
 import { COLORS } from 'constants/color';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { Lock, Mail } from 'lucide-react-native';
 import { useForm } from 'react-hook-form';
 import {
   Image,
@@ -16,6 +12,7 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   Switch,
+  SwitchComponent,
 } from 'react-native';
 import Google from '../../assets/svgs/google.svg';
 import Apple from '../../assets/svgs/apple.svg';
@@ -90,7 +87,15 @@ export default function Page() {
               </View>
               <View className="w-full flex-row justify-between">
                <View className="flex flex-row items-center gap-2">
-               <Switch className="ml-2" value={isEnabled} onValueChange={toggleSwitch} />
+               <Switch
+                  trackColor={{false: '#767577', true: COLORS.button}}
+                  thumbColor={COLORS.offWhite}
+                  ios_backgroundColor={COLORS.bgdeep}
+                  className="ml-2"
+                  value={isEnabled}
+                  onValueChange={toggleSwitch}
+                  style={{ transform: [{ scale: 0.75 }] }}
+               />
                 <Text className="text-lg font-light text-white ">Remember Me</Text>
                 </View>
                 <TouchableOpacity
