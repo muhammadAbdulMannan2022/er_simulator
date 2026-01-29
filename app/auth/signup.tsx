@@ -12,18 +12,30 @@ import {
   ImageBackground,
   TouchableOpacity,
   useWindowDimensions,
+  Pressable,
 } from 'react-native';
 import Google from '../../assets/svgs/google.svg';
 import Apple from '../../assets/svgs/apple.svg';
 import { KeyboardAwareScrollView, WindowDimensionsEvents } from 'react-native-keyboard-controller';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import BottomSheet from 'components/ui/bottom-sheet';
+import { useState } from 'react';
+import Specialty from "assets/svgs/specialty.svg"
+import { ChevronDown } from 'lucide-react-native';
 
 export default function SignUp() {
   const router = useRouter();
+  const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
 
   const { height } = useWindowDimensions();
 
   const dummyForm = useForm();
+
+  const handleSelectOption = (option: string) => {
+    setSelected(option);
+    setBottomSheetVisible(false);
+  };
 
   return (
     <>
@@ -62,7 +74,7 @@ export default function SignUp() {
                 <Text className="text-center text-3xl font-semibold text-[#fff]">
                   Join Thousands of Medical Professionals
                 </Text>
-                <Text className="text-grayText mb-2 text-xl font-normal">
+                <Text className="mb-2 text-xl font-normal text-grayText">
                   Join thousands of medical professionals
                 </Text>
 
@@ -100,17 +112,30 @@ export default function SignUp() {
                     control={dummyForm.control}
                     errors={{}}
                     icon="LockKeyhole"
-                     secureTextEntry={true}
-                     eyeIcon={true}
-                     password
+                    secureTextEntry={true}
+                    eyeIcon={true}
+                    password
                   />
+                  <Pressable onPress={() => setBottomSheetVisible(true)}>
+
                   <InputForm
                     title={'specialty'}
                     label={'Specialty'}
-                    placeHolder={'Emergen'}
+                    placeHolder={selected}
                     control={dummyForm.control}
                     errors={{}}
-                    icon={'ClipboardPlus'}
+                    svg={<Specialty />}
+                    rightIcon={<ChevronDown color={COLORS.bglight} />}
+                    />
+                    </Pressable>
+
+                  <BottomSheet
+                    visible={isBottomSheetVisible}
+                    onClose={() => setBottomSheetVisible(false)}
+                    title={'Emergen'}
+                    options={['A', 'B', 'C', 'D']}
+                    onSelect={handleSelectOption}
+                  //   selectedValue={selected}
                   />
 
                   <InputForm
@@ -119,7 +144,7 @@ export default function SignUp() {
                     placeHolder={'Enter your npi number'}
                     control={dummyForm.control}
                     errors={{}}
-                    icon={'ClipboardPlus'}
+                    svg={<Specialty />}
                   />
                 </View>
                 {/* <View className="w-full flex-row justify-between">
@@ -137,7 +162,7 @@ export default function SignUp() {
                       borderRadius: 10,
                     }}>
                     <Text
-                      className="font-roboto text-center text-[20px] font-bold text-white"
+                      className="text-center font-roboto text-[20px] font-bold text-white"
                       style={{ paddingVertical: 15 }}>
                       Create Account
                     </Text>
@@ -181,7 +206,7 @@ export default function SignUp() {
                   </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                  <Text className="font-roboto text-grayText text-lg font-medium">
+                  <Text className="font-roboto text-lg font-medium text-grayText">
                     Already have an account?{' '}
                   </Text>
                   <TouchableOpacity

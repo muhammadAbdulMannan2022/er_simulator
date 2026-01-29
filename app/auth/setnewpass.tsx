@@ -73,6 +73,7 @@ export default function SetNewPassword() {
                   control={dummyForm.control}
                   errors={{}}
                   icon={'Lock'}
+                  password
                 />
                 <InputForm
                   title={'comfirmPassword'}
@@ -81,6 +82,7 @@ export default function SetNewPassword() {
                   control={dummyForm.control}
                   errors={{}}
                   icon={'Lock'}
+                  password
                 />
               </View>
 

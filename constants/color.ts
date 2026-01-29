@@ -8,4 +8,5 @@ export const COLORS = {
   deep: '#346C6C',
   orgbtn: '#E26C39',
   offWhite: '#F7F9FA',
+  text: "#fff"
 };

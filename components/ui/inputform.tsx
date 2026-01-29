@@ -3,7 +3,7 @@ import { Controller, useForm, Control, FieldErrors } from 'react-hook-form';
 import { COLORS } from 'constants/color';
 import { Eye, EyeOff} from 'lucide-react-native';
 import * as Icons from 'lucide-react-native';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 type Props<T> = {
   title: keyof T;
@@ -12,7 +12,10 @@ type Props<T> = {
   control: Control<T>;
   errors: FieldErrors<T>;
   keyboardType?: 'default' | 'email-address' | 'numeric' | 'number-pad';
-  icon: string;
+  icon?: string;
+  password?: boolean;
+  svg?: ReactNode;
+  rightIcon?: ReactNode;
 };
 
 const InputForm = ({
@@ -23,7 +26,9 @@ const InputForm = ({
   errors,
   keyboardType = 'default',
   icon,
-  password = false
+  password = false,
+  svg,
+  rightIcon
 }: Props) => {
   const IconComponent = Icons[icon];
   const [seePass, setSeePass] = useState(true)
@@ -37,7 +42,9 @@ const InputForm = ({
         name={title}
         render={({ field: { onChange, value } }) => (
           <View style={styles.inputContainer}>
+            {svg ? svg :
             <IconComponent size={22} color="#026672" style={{ marginRight: 8 }} />
+            }
             <TextInput
               placeholder={placeHolder}
               value={value}
@@ -62,6 +69,11 @@ const InputForm = ({
                   <Eye color={COLORS.bglight} />
                </TouchableOpacity>}
             </View>
+            }
+            {
+               rightIcon && <View style={{ right: 20, position: 'absolute'}}>
+                  {rightIcon}
+               </View>
             }
           </View>
         )}
