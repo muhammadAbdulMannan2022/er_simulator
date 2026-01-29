@@ -1,8 +1,5 @@
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import React from 'react';
 import { COLORS } from 'constants/color';
-import { LinearGradient } from 'expo-linear-gradient';
-import Point from '../../assets/svgs/point.svg';
 import { getGradientColorAt } from 'utils/gradientcolor';
 
 const gradientStops = [
@@ -15,8 +12,6 @@ const gradientStops = [
 ];
 
 const CardWithBox = () => {
-  const color = getGradientColorAt(0.6, gradientStops);
-  console.log(color);
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.deep, borderRadius: 12 }}>

@@ -4,6 +4,7 @@ import { COLORS } from 'constants/color';
 import { LinearGradient } from 'expo-linear-gradient';
 import Point from '../../assets/svgs/point.svg';
 import { getGradientColorAt } from 'utils/gradientcolor';
+import Badge from "assets/svgs/badge.svg"
 
 const gradientStops = [
   { stop: 0, color: '#152CAF' },
@@ -16,7 +17,6 @@ const gradientStops = [
 
 const CardWithBar = () => {
   const color = getGradientColorAt(0.6, gradientStops);
-  console.log(color);
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.deep, borderRadius: 12 }}>
@@ -28,18 +28,8 @@ const CardWithBar = () => {
           marginHorizontal: 10,
           alignItems: 'center',
         }}>
-        <View style={{}}>
-          <Text
-            className="font-roboto  text-sm font-normal"
-            style={{
-              backgroundColor: '#30E50C',
-              paddingVertical: 1,
-              paddingHorizontal: 6,
-              borderRadius: 10,
-            }}>
-            In Progress
-          </Text>
-        </View>
+         <Badge style={{ left: -14, position: "absolute"}} width={75} height={70} />
+         <Text style={{ fontSize: 10, fontWeight: 500, marginLeft: -6 }}>In Progress</Text>
         <Text className="font-roboto text-lg font-semibold text-white">50% Complete</Text>
       </View>
       <View style={{ paddingHorizontal: 12, paddingVertical: 20 }}>
