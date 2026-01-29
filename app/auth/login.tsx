@@ -84,19 +84,13 @@ export default function Page() {
                   control={dummyForm.control}
                   errors={{}}
                   icon={'Lock'}
+                  password
                 />
+
               </View>
               <View className="w-full flex-row justify-between">
                <View className="flex flex-row items-center gap-2">
-                <Switch
-                    className="ml-2"
-                    trackColor={{ false: '#767577', true: COLORS.button }}
-                    thumbColor={isEnabled ? COLORS.offWhite : '#f4f3f4'}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
-                    style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
-                  />
+               <Switch className="ml-2" value={isEnabled} onValueChange={toggleSwitch} />
                 <Text className="text-lg font-light text-white ">Remember Me</Text>
                 </View>
                 <TouchableOpacity

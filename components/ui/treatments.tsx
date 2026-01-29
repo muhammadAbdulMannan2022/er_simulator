@@ -8,6 +8,7 @@ import Neuro from '../../assets/svgs/neuro.svg';
 import Toxi from '../../assets/svgs/toxi.svg';
 import Ped from '../../assets/svgs/ped.svg';
 import { router } from 'expo-router';
+import { Colors } from 'toastify-react-native/config/theme';
 // import CaseList from '../../app/others/caselist'
 
 const Treatments = () => {
@@ -125,6 +126,38 @@ const Treatments = () => {
             }}>
             <Ped />
             <Text className="py-3 text-center text-xl font-bold text-[#40464B] ">Pediatric</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flex: 1, flexDirection: 'row', gap: 10, marginBottom: 20 }}>
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 5,
+              backgroundColor: '#EDFDFF',
+              borderRadius: 6,
+              borderWidth: 0.5,
+              borderColor: COLORS.deep,
+            }}>
+            <Toxi />
+            <Text className="py-3 text-center text-xl font-bold text-[#40464B] ">Example</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 5,
+              backgroundColor: '#EDFDFF',
+              borderRadius: 6,
+              borderWidth: 0.5,
+              borderColor: COLORS.deep,
+            }}>
+            <Ped />
+            <Text className="py-3 text-center text-xl font-bold text-[#40464B] ">Example</Text>
           </TouchableOpacity>
         </View>
         <View style={{ flex: 1, flexDirection: 'row', gap: 10, marginBottom: 20 }}>

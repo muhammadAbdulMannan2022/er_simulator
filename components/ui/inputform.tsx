@@ -1,9 +1,9 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native';
-import React from 'react';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { Controller, useForm, Control, FieldErrors } from 'react-hook-form';
 import { COLORS } from 'constants/color';
-import { Lock, Mail, User, LockKeyhole, ClipboardPlus } from 'lucide-react-native';
+import { Eye, EyeOff} from 'lucide-react-native';
 import * as Icons from 'lucide-react-native';
+import { useState } from 'react';
 
 type Props<T> = {
   title: keyof T;
@@ -23,8 +23,10 @@ const InputForm = ({
   errors,
   keyboardType = 'default',
   icon,
+  password = false
 }: Props) => {
   const IconComponent = Icons[icon];
+  const [seePass, setSeePass] = useState(true)
   return (
     <View style={{ marginBottom: 10, width: '100%' }}>
       <Text className="font-roboto text-white" style={{ fontSize: 20, marginBottom: 12 }}>
@@ -46,8 +48,21 @@ const InputForm = ({
               spellCheck={false}
               keyboardType={keyboardType}
               style={styles.input}
+              secureTextEntry={password ? seePass : false}
             />
             {errors[title] && <Text style={{ color: 'red' }}>{errors[title].message}</Text>}
+
+            { password && <View style={{ right: 20, position: 'absolute'}}>{
+               seePass ?
+               <TouchableOpacity onPress={() => setSeePass(false)}>
+                  <EyeOff color={COLORS.bglight} />
+               </TouchableOpacity>
+
+               :<TouchableOpacity onPress={() => setSeePass(true)}>
+                  <Eye color={COLORS.bglight} />
+               </TouchableOpacity>}
+            </View>
+            }
           </View>
         )}
       />
