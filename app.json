@@ -4,10 +4,7 @@
     "slug": "ersimulator",
     "version": "1.0.0",
     "scheme": "ersimulator",
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": ["ios", "android"],
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
@@ -15,9 +12,21 @@
       "tsconfigPaths": true
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone for medical simulations."
+        }
+      ],
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "DEFAULT"
+        }
+      ]
     ],
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -25,10 +34,9 @@
       "resizeMode": "cover",
       "backgroundColor": "#133A3E"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "requireFullScreen": true,
       "supportsTablet": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
@@ -46,7 +54,8 @@
         "backgroundColor": "#133A3E"
       },
       "package": "com.ersimulator.app",
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": ["RECORD_AUDIO"]
     },
     "extra": {
       "router": {},

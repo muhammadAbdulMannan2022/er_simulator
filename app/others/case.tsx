@@ -4,28 +4,36 @@ import { COLORS } from 'constants/color';
 import { ChevronLeft, CircleCheckBig, LockKeyhole } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import Frame from '../../assets/svgs/frame.svg';
-import { BlurView } from 'expo-blur';
+import { BlurView } from '@react-native-community/blur';
 import Beginner from 'assets/svgs/beginner.svg';
 import Cardiac from 'assets/svgs/cardiac-border.svg';
+import { useEffect, useState } from 'react';
 
 const Case = () => {
   const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // Small delay to ensure layout is settled for native blur module
+    const timer = setTimeout(() => setIsMounted(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Layout>
-      <View style={{ flex: 1, width: '90%', marginHorizontal: 'auto', marginTop: 20 }}>
+      <View style={{ flex: 1, width: '90%', alignSelf: 'center', marginTop: 10 }}>
         <View
           style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <TouchableOpacity
-            onPress={() => router.push('./caselist')}
+            onPress={() => router.back()}
             style={{
               backgroundColor: '#82A4A5',
               borderWidth: 1,
               borderColor: COLORS.deep,
               borderRadius: 40,
-              padding: 3,
+              padding: 5,
             }}>
-            <ChevronLeft size={35} color={'#fff'} />
+            <ChevronLeft size={30} color={'#fff'} />
           </TouchableOpacity>
           <View>
             <Image
@@ -67,13 +75,13 @@ const Case = () => {
 
           <View>
             <Text
-              className="w-[90%] font-roboto text-3xl font-semibold"
+              className="w-[90%] font-roboto text-3xl font-bold"
               style={{ color: COLORS.deep }}>
               Acute MyocardialInfarction with Cardiogenic Shock
             </Text>
             <Text
-              className="w-[90%] font-roboto font-light text-[#646668]"
-              style={{ fontSize: 15, marginTop: 10, lineHeight: 20 }}>
+              className="w-[90%] font-roboto font-normal text-[#40464B]"
+              style={{ fontSize: 16, marginTop: 12, lineHeight: 24 }}>
               A 58-year-old male presents to the ED with severe chest pain, diaphoresis, and
               hypotension. Practice your approach to STEMI management and cardiogenic shock
               stabilization.
@@ -81,63 +89,38 @@ const Case = () => {
           </View>
           <View>
             <Text
-              className="w-[90%] font-roboto text-2xl font-semibold"
+              className="w-[90%] font-roboto text-2xl font-bold"
               style={{ color: COLORS.deep, marginTop: 30 }}>
               Learning Objectives:
             </Text>
-            <View style={{ paddingTop: 20 }}>
-              <View style={styles.wrapper}>
-                <View style={styles.card}>
-                  <LockKeyhole color="#527F7B" />
-                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
-                </View>
+            <View style={{ gap: 20, marginTop: 20 }}>
+              {isMounted && [
+                'Rapidly recognize STEMI patterns on 12-lead ECG and initiate protocol.',
+                'Implement immediate pharmacological interventions including Aspirin and Heparin.',
+                'Coordinate emergency transfer and stabilization for primary PCI.',
+              ].map((objective, index) => (
+                <View key={index} style={styles.objectiveWrapper}>
+                  {/* The actual content (hidden under blur) */}
+                  <View style={styles.objectiveContent}>
+                    <CircleCheckBig color={COLORS.deep} size={20} />
+                    <Text style={styles.objectiveText}>{objective}</Text>
+                  </View>
 
-                <BlurView intensity={10} tint="light" style={StyleSheet.absoluteFill} />
-                <View
-                  style={[
-                    styles.card,
-                    { position: 'absolute', backgroundColor: 'transparent', marginLeft: 20 },
-                  ]}>
-                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
-                  <LockKeyhole color="#527F7B" />
-                </View>
-              </View>
-            </View>
-            <View style={{ paddingTop: 20 }}>
-              <View style={styles.wrapper}>
-                <View style={styles.card}>
-                  <LockKeyhole color="#527F7B" />
-                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
-                </View>
+                  {/* Blur Overlay */}
+                  <BlurView
+                    blurType="light"
+                    blurAmount={1}
+                    reducedTransparencyFallbackColor="white"
+                    style={[StyleSheet.absoluteFill, { borderRadius: 12 }]}
+                  />
 
-                <BlurView intensity={10} tint="light" style={StyleSheet.absoluteFill} />
-                <View
-                  style={[
-                    styles.card,
-                    { position: 'absolute', backgroundColor: 'transparent', marginLeft: 20 },
-                  ]}>
-                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
-                  <LockKeyhole color="#527F7B" />
+                  {/* Lock Overlay Content */}
+                  <View style={styles.lockOverlay}>
+                    <LockKeyhole color="#527F7B" size={20} />
+                    <Text style={styles.lockText}>Complete the simulation to Unlock</Text>
+                  </View>
                 </View>
-              </View>
-            </View>
-            <View style={{ paddingTop: 20 }}>
-              <View style={styles.wrapper}>
-                <View style={styles.card}>
-                  <LockKeyhole color="#527F7B" />
-                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
-                </View>
-
-                <BlurView intensity={10} tint="light" style={StyleSheet.absoluteFill} />
-                <View
-                  style={[
-                    styles.card,
-                    { position: 'absolute', backgroundColor: 'transparent', marginLeft: 20 },
-                  ]}>
-                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
-                  <LockKeyhole color="#527F7B" />
-                </View>
-              </View>
+              ))}
             </View>
           </View>
 
@@ -180,5 +163,41 @@ const styles = StyleSheet.create({
     color: '#9AA3A7',
     fontSize: 16,
     fontWeight: '500',
+  },
+  objectiveWrapper: {
+    borderRadius: 12,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#E0E7E7',
+    backgroundColor: '#fff',
+    minHeight: 80,
+    justifyContent: 'center',
+  },
+  objectiveContent: {
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  objectiveText: {
+    flex: 1,
+    fontSize: 16,
+    color: '#40464B',
+    fontWeight: '400',
+    lineHeight: 22,
+  },
+  lockOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    paddingHorizontal: 20,
+  },
+  lockText: {
+    color: '#527F7B',
+    fontSize: 15,
+    fontWeight: '600',
   },
 });

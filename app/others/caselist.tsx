@@ -20,19 +20,19 @@ const CaseList = () => {
 
   return (
     <Layout>
-      <View style={{ flex: 1, width: '90%', marginHorizontal: 'auto', marginTop: 20 }}>
+      <View style={{ flex: 1, width: '90%', alignSelf: 'center', marginTop: 10 }}>
         <View
           style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <TouchableOpacity
-            onPress={() => router.replace('../(tabs)/home')}
+            onPress={() => router.back()}
             style={{
               backgroundColor: '#82A4A5',
               borderWidth: 1,
               borderColor: COLORS.deep,
               borderRadius: 40,
-              padding: 3,
+              padding: 5,
             }}>
-            <ChevronLeft size={35} color={'#fff'} />
+            <ChevronLeft size={30} color={'#fff'} />
           </TouchableOpacity>
           <View>
             <Image
@@ -47,62 +47,74 @@ const CaseList = () => {
             />
           </View>
         </View>
+
         <View style={{ marginVertical: 20 }}>
-          <Text className="font-roboto text-3xl font-semibold">List of Cases</Text>
-          <View>
+          <Text className="font-roboto text-3xl font-semibold" style={{ color: COLORS.deep }}>
+            List of Cases
+          </Text>
+          <View style={{ marginTop: 10 }}>
             {totalCase.map((item, index) => (
               <TouchableOpacity
                 onPress={() => handleSeletedCases(item.id)}
                 key={index}
+                activeOpacity={0.8}
                 style={{
-                  marginTop: 20,
+                  marginTop: 15,
                   flexDirection: 'row',
                   gap: 15,
                   alignItems: 'center',
-                  backgroundColor: item.selected ? COLORS.deep : '#EFEFEF',
-                  paddingHorizontal: 20,
-                  paddingVertical: 10,
-                  borderRadius: 15,
-
+                  backgroundColor: item.selected ? COLORS.deep : '#fff',
+                  paddingHorizontal: 15,
+                  paddingVertical: 12,
+                  borderRadius: 12,
+                  borderWidth: 1,
+                  borderColor: item.selected ? COLORS.deep : '#E0E7E7',
                   shadowColor: '#000',
                   shadowOffset: { width: 0, height: 2 },
-                  shadowOpacity: 0.2,
-                  shadowRadius: 3,
-                  elevation: 4,
+                  shadowOpacity: 0.1,
+                  shadowRadius: 4,
+                  elevation: 3,
                 }}>
-                <View style={{}}>
+                <View>
                   <Text
-                    className="font-roboto text-xl font-bold text-white"
+                    className="font-roboto text-lg font-bold"
                     style={{
-                      backgroundColor: COLORS.deep,
-                      paddingHorizontal: 10.5,
-                      paddingVertical: 10,
+                      backgroundColor: item.selected ? '#fff' : COLORS.deep,
+                      color: item.selected ? COLORS.deep : '#fff',
+                      paddingHorizontal: 12,
+                      paddingVertical: 8,
                       borderRadius: 8,
+                      minWidth: 40,
+                      textAlign: 'center',
                     }}>
                     {item.id}
                   </Text>
                 </View>
-                <View style={{ width: '80%' }}>
+                <View style={{ flex: 1 }}>
                   <Text
-                    className="font-roboto text-xl font-normal "
-                    style={{ color: item.selected ? '#fff' : '#163A53' }}>
+                    className="font-roboto text-lg font-medium"
+                    style={{ color: item.selected ? '#fff' : '#40464B' }}>
                     {item.case}
                   </Text>
                 </View>
               </TouchableOpacity>
             ))}
           </View>
-          <View style={{ marginTop: 40 }}>
+
+          <View style={{ marginTop: 30, marginBottom: 20 }}>
             <TouchableOpacity
               onPress={() => router.push('./case')}
               style={{
-                flex: 1,
                 backgroundColor: COLORS.orgbtn,
-                borderRadius: 8,
-                borderWidth: 1,
-                borderColor: COLORS.orgbtn,
+                borderRadius: 10,
+                paddingVertical: 15,
+                shadowColor: COLORS.orgbtn,
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
+                shadowRadius: 5,
+                elevation: 6,
               }}>
-              <Text className="py-3 text-center text-xl font-bold text-white ">Continue</Text>
+              <Text className="text-center text-xl font-bold text-white">Continue</Text>
             </TouchableOpacity>
           </View>
         </View>
