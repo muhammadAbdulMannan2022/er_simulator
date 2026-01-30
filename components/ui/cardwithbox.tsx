@@ -1,15 +1,6 @@
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { COLORS } from 'constants/color';
-import { getGradientColorAt } from 'utils/gradientcolor';
-
-const gradientStops = [
-  { stop: 0, color: '#152CAF' },
-  { stop: 0.18, color: '#0D2780' },
-  { stop: 0.41, color: '#133A75' },
-  { stop: 0.68, color: '#377FA9' },
-  { stop: 0.95, color: '#2FA4B3' },
-  { stop: 1, color: '#2EABB5' },
-];
+import Badge from "assets/svgs/badge.svg"
 
 const CardWithBox = () => {
 
@@ -23,18 +14,8 @@ const CardWithBox = () => {
           marginHorizontal: 10,
           alignItems: 'center',
         }}>
-        <View style={{}}>
-          <Text
-            className="font-roboto  text-sm font-normal"
-            style={{
-              backgroundColor: '#30E50C',
-              paddingVertical: 1,
-              paddingHorizontal: 6,
-              borderRadius: 10,
-            }}>
-            Case
-          </Text>
-        </View>
+         <Badge style={{ left: -14, position: "absolute"}} width={60} height={60} />
+         <Text style={{ fontSize: 10, fontWeight: 500 }}>Case</Text>
         <Text className="font-roboto text-lg font-semibold text-white">Single Trial</Text>
       </View>
       <View style={{ paddingHorizontal: 12, paddingVertical: 20 }}>

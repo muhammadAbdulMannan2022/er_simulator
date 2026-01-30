@@ -1,24 +1,15 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
 import Layout from 'components/layout';
 import { COLORS } from 'constants/color';
 import { ChevronLeft, CircleCheckBig, LockKeyhole } from 'lucide-react-native';
-import { cases } from 'utils/dumydata';
 import { useRouter } from 'expo-router';
 import Frame from '../../assets/svgs/frame.svg';
 import { BlurView } from 'expo-blur';
+import Beginner from 'assets/svgs/beginner.svg';
+import Cardiac from 'assets/svgs/cardiac-border.svg';
 
 const Case = () => {
-  const [totalCase, setTotalCase] = useState(cases);
   const router = useRouter();
-
-  const handleSeletedCases = (id) => {
-    setTotalCase((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, selected: true } : { ...item, selected: false }
-      )
-    );
-  };
 
   return (
     <Layout>
@@ -62,22 +53,26 @@ const Case = () => {
             <Frame />
           </View>
           <View style={{ flexDirection: 'row', marginVertical: 30, gap: 20 }}>
-            <Text className="font-roboto rounded-lg border border-[#2EA485] px-3.5 py-2 font-medium text-[#2EA485]">
-              Beginner
-            </Text>
-            <Text className="font-roboto rounded-lg border border-[#E8564C] px-3.5 py-2 font-medium text-[#E8564C]">
-              Cardiac
-            </Text>
+            <View>
+              <Beginner />
+              <Text style={{ color: COLORS.bglight, position: 'absolute', left: 25, top: 8 }}>
+                Beginner
+              </Text>
+            </View>
+            <View>
+              <Cardiac />
+              <Text style={{ color: 'red', position: 'absolute', left: 25, top: 8 }}>Cardiac</Text>
+            </View>
           </View>
 
           <View>
             <Text
-              className="font-roboto w-[90%] text-3xl font-semibold"
+              className="w-[90%] font-roboto text-3xl font-semibold"
               style={{ color: COLORS.deep }}>
               Acute MyocardialInfarction with Cardiogenic Shock
             </Text>
             <Text
-              className="font-roboto w-[90%] font-light text-[#646668]"
+              className="w-[90%] font-roboto font-light text-[#646668]"
               style={{ fontSize: 15, marginTop: 10, lineHeight: 20 }}>
               A 58-year-old male presents to the ED with severe chest pain, diaphoresis, and
               hypotension. Practice your approach to STEMI management and cardiogenic shock
@@ -86,75 +81,63 @@ const Case = () => {
           </View>
           <View>
             <Text
-              className="font-roboto w-[90%] text-2xl font-semibold"
+              className="w-[90%] font-roboto text-2xl font-semibold"
               style={{ color: COLORS.deep, marginTop: 30 }}>
               Learning Objectives:
             </Text>
             <View style={{ paddingTop: 20 }}>
-              <BlurView
-                intensity={30}
-                tint="dark"
-                style={{
-                  borderRadius: 10,
-                  padding: 15,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'row',
-                  gap: 10,
-                  borderWidth: 1,
-                  overflow: 'hidden',
-                  borderColor: '#40464B',
-                }}>
-                {/* "Normal" text */}
-                <Text style={{ color: '#40464B', fontSize: 18 }}>
-                  Complete the simulation to Unlock
-                </Text>
-                <LockKeyhole color={'#527F7B'} />
-              </BlurView>
+              <View style={styles.wrapper}>
+                <View style={styles.card}>
+                  <LockKeyhole color="#527F7B" />
+                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
+                </View>
+
+                <BlurView intensity={10} tint="light" style={StyleSheet.absoluteFill} />
+                <View
+                  style={[
+                    styles.card,
+                    { position: 'absolute', backgroundColor: 'transparent', marginLeft: 20 },
+                  ]}>
+                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
+                  <LockKeyhole color="#527F7B" />
+                </View>
+              </View>
             </View>
             <View style={{ paddingTop: 20 }}>
-              <BlurView
-                intensity={30}
-                tint="dark"
-                style={{
-                  borderRadius: 10,
-                  padding: 15,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'row',
-                  gap: 10,
-                  borderWidth: 1,
-                  overflow: 'hidden',
-                  borderColor: '#40464B',
-                }}>
-                {/* "Normal" text */}
-                <Text style={{ color: '#40464B', fontSize: 18 }}>
-                  Complete the simulation to Unlock
-                </Text>
-                <LockKeyhole color={'#527F7B'} />
-              </BlurView>
+              <View style={styles.wrapper}>
+                <View style={styles.card}>
+                  <LockKeyhole color="#527F7B" />
+                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
+                </View>
+
+                <BlurView intensity={10} tint="light" style={StyleSheet.absoluteFill} />
+                <View
+                  style={[
+                    styles.card,
+                    { position: 'absolute', backgroundColor: 'transparent', marginLeft: 20 },
+                  ]}>
+                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
+                  <LockKeyhole color="#527F7B" />
+                </View>
+              </View>
             </View>
             <View style={{ paddingTop: 20 }}>
-              <BlurView
-                intensity={30}
-                tint="dark"
-                style={{
-                  borderRadius: 10,
-                  padding: 15,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'row',
-                  gap: 10,
-                  borderWidth: 1,
-                  overflow: 'hidden',
-                  borderColor: '#40464B',
-                }}>
-                {/* "Normal" text */}
-                <Text style={{ color: '#40464B', fontSize: 18 }}>
-                  Complete the simulation to Unlock
-                </Text>
-                <LockKeyhole color={'#527F7B'} />
-              </BlurView>
+              <View style={styles.wrapper}>
+                <View style={styles.card}>
+                  <LockKeyhole color="#527F7B" />
+                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
+                </View>
+
+                <BlurView intensity={10} tint="light" style={StyleSheet.absoluteFill} />
+                <View
+                  style={[
+                    styles.card,
+                    { position: 'absolute', backgroundColor: 'transparent', marginLeft: 20 },
+                  ]}>
+                  <Text style={styles.text}>Complete the simulation to Unlock</Text>
+                  <LockKeyhole color="#527F7B" />
+                </View>
+              </View>
             </View>
           </View>
 
@@ -178,17 +161,24 @@ const Case = () => {
 };
 
 export default Case;
-
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  wrapper: {
+    borderRadius: 10,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#40464B',
   },
-  absolute: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+  card: {
+    padding: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    backgroundColor: '#F2F4F6', // subtle base
+  },
+  text: {
+    color: '#9AA3A7',
+    fontSize: 16,
+    fontWeight: '500',
   },
 });

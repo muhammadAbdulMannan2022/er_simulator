@@ -9,10 +9,12 @@ import CardWithBar from 'components/ui/cardwithbar';
 import Treatments from 'components/ui/treatments';
 import CardWithBox from 'components/ui/cardwithbox';
 import { useState, useRef } from 'react';
+import { useLocalSearchParams } from 'expo-router/build/hooks';
 
 export default function Index() {
   const dummyForm = useForm();
-  const [guest, useGuest] = useState(false);
+  const { role } = useLocalSearchParams()
+  console.log(role)
 
   const [isBeastMode, setIsBeastMode] = useState(false);
   const [sliderWidth, setSliderWidth] = useState(0);
@@ -84,7 +86,7 @@ export default function Index() {
           padding={16}
         />
 
-        {guest ? <CardWithBox /> : <CardWithBar />}
+        {role === "guest" ? <CardWithBox /> : <CardWithBar />}
         <View style={{ marginTop: 30 }}>
           <Text className="font-roboto  text-3xl font-semibold">Skill Level</Text>
 

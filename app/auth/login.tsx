@@ -174,7 +174,12 @@ export default function Page() {
                 </TouchableOpacity>
               </View>
               <TouchableOpacity
-                style={{ borderWidth: 1, borderColor: '#00E5FF', borderRadius: 10, marginTop: 10 }}>
+                style={{ borderWidth: 1, borderColor: '#00E5FF', borderRadius: 10, marginTop: 10 }}
+                onPress={() => router.push({
+                  pathname: "/(tabs)/home",
+                  params: { role: "guest" }
+               })}
+                >
                 <Text className="font-roboto px-[50px] py-[8px] text-lg font-semibold text-[#00E5FF]">
                   Continue As Guest
                 </Text>

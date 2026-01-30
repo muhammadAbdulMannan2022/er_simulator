@@ -111,7 +111,7 @@ const CardWithBar = () => {
                     fontWeight: '900',
                     fontSize: 12,
                   }}>
-                  55%
+                  50%
                 </Text>
               </View>
             </View>
