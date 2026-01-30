@@ -20,7 +20,7 @@ import { KeyboardAwareScrollView, WindowDimensionsEvents } from 'react-native-ke
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BottomSheet from 'components/ui/bottom-sheet';
 import { useState } from 'react';
-import Specialty from "assets/svgs/specialty.svg"
+import Specialty from 'assets/svgs/specialty.svg';
 import { ChevronDown } from 'lucide-react-native';
 
 export default function SignUp() {
@@ -39,12 +39,12 @@ export default function SignUp() {
 
   return (
     <>
-      <View className="relative  flex-1" style={{ width: '100%', height: '100%' }}>
+      <View className="relative  flex-1 " style={{ width: '100%', height: '100%' }}>
         <LinearGradient
           colors={['#101112', '#000000']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          className="absolute inset-0   py-16">
+          className="absolute inset-0   pb-16">
           {/* Radial gradient overlay */}
           <ImageBackground
             source={require('../../assets/images/splash-radial-gradient.png')}
@@ -117,17 +117,16 @@ export default function SignUp() {
                     password
                   />
                   <Pressable onPress={() => setBottomSheetVisible(true)}>
-
-                  <InputForm
-                    title={'specialty'}
-                    label={'Specialty'}
-                    placeHolder={selected}
-                    control={dummyForm.control}
-                    errors={{}}
-                    svg={<Specialty />}
-                    rightIcon={<ChevronDown color={COLORS.bglight} />}
+                    <InputForm
+                      title={'specialty'}
+                      label={'Specialty'}
+                      placeHolder={selected}
+                      control={dummyForm.control}
+                      errors={{}}
+                      svg={<Specialty />}
+                      rightIcon={<ChevronDown color={COLORS.bglight} />}
                     />
-                    </Pressable>
+                  </Pressable>
 
                   <BottomSheet
                     visible={isBottomSheetVisible}
@@ -135,7 +134,7 @@ export default function SignUp() {
                     title={'Emergen'}
                     options={['A', 'B', 'C', 'D']}
                     onSelect={handleSelectOption}
-                  //   selectedValue={selected}
+                    //   selectedValue={selected}
                   />
 
                   <InputForm

@@ -47,15 +47,14 @@ export default function OTPVerify() {
           />
 
           <KeyboardAwareScrollView
-            style={{}}
+            style={{ flex: 1 }}
             contentContainerStyle={{
-              alignContent: 'center',
+              flexGrow: 1,
               alignItems: 'center',
               justifyContent: 'center',
-              minHeight: height,
             }}>
             {/* Center logo */}
-            <View className="flex h-full w-full flex-col items-center justify-center gap-3 px-6 py-5">
+            <View className="w-full flex-col items-center justify-center gap-3 px-6 py-5">
               <View className="flex w-full items-center justify-center py-5">
                 <ImageBackground
                   source={require('../../assets/images/splash-icon-full.png')}

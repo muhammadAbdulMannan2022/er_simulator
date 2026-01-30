@@ -34,7 +34,7 @@ export default function ForgotPassword() {
           colors={['#101112', '#000000']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          className="absolute inset-0   py-16">
+          className="absolute inset-0   pb-16">
           {/* Radial gradient overlay */}
           <ImageBackground
             source={require('../../assets/images/splash-radial-gradient.png')}
@@ -43,15 +43,14 @@ export default function ForgotPassword() {
           />
 
           <KeyboardAwareScrollView
-            style={{}}
+            style={{ flex: 1 }}
             contentContainerStyle={{
-              alignContent: 'center',
+              flexGrow: 1,
               alignItems: 'center',
               justifyContent: 'center',
-              minHeight: height,
             }}>
             {/* Center logo */}
-            <View className="flex h-full w-full flex-col items-center justify-center gap-3 px-6 py-5">
+            <View className="w-full flex-col items-center justify-center gap-3 px-6 py-5">
               <View className="flex w-full items-center justify-center py-5">
                 <ImageBackground
                   source={require('../../assets/images/splash-icon-full.png')}
@@ -61,7 +60,7 @@ export default function ForgotPassword() {
               </View>
 
               <Text className="text-3xl font-semibold text-[#fff]">Forgot Password</Text>
-              <Text className="text-grayText mb-2 w-[80%] text-center text-xl font-normal">
+              <Text className="mb-2 w-[80%] text-center text-xl font-normal text-grayText">
                 Don't worry! Please enter the email address linked with your account.
               </Text>
 
@@ -88,7 +87,7 @@ export default function ForgotPassword() {
                     borderRadius: 10,
                   }}>
                   <Text
-                    className="font-roboto text-center text-[20px] font-bold text-white"
+                    className="text-center font-roboto text-[20px] font-bold text-white"
                     style={{ paddingVertical: 15 }}>
                     Send
                   </Text>
@@ -96,7 +95,7 @@ export default function ForgotPassword() {
               </View>
 
               <View style={{ flexDirection: 'row', marginTop: 25 }}>
-                <Text className="font-roboto text-grayText text-lg font-medium">
+                <Text className="font-roboto text-lg font-medium text-grayText">
                   Remember Password?{' '}
                 </Text>
                 <TouchableOpacity>

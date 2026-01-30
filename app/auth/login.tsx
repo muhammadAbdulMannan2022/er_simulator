@@ -11,13 +11,12 @@ import {
   ImageBackground,
   TouchableOpacity,
   useWindowDimensions,
-  Switch,
-  SwitchComponent,
 } from 'react-native';
 import Google from '../../assets/svgs/google.svg';
 import Apple from '../../assets/svgs/apple.svg';
 import { KeyboardAwareScrollView, WindowDimensionsEvents } from 'react-native-keyboard-controller';
 import { useState } from 'react';
+import { CustomSwitch } from 'components/ui/CustomSwitch';
 
 export default function Page() {
   const router = useRouter();
@@ -34,7 +33,7 @@ export default function Page() {
           colors={['#101112', '#000000']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          className="absolute inset-0   py-16">
+          className="absolute inset-0  pb-16">
           {/* Radial gradient overlay */}
           <ImageBackground
             source={require('../../assets/images/splash-radial-gradient.png')}
@@ -61,7 +60,7 @@ export default function Page() {
               </View>
 
               <Text className="text-3xl font-semibold text-[#fff]">Welcome Back</Text>
-              <Text className="text-grayText mb-2 text-xl font-normal">
+              <Text className="mb-2 text-xl font-normal text-grayText">
                 Sign in to continue your training
               </Text>
 
@@ -83,24 +82,15 @@ export default function Page() {
                   icon={'Lock'}
                   password
                 />
-
               </View>
               <View className="w-full flex-row justify-between">
-               <View className="flex flex-row items-center gap-2">
-               <Switch
-                  trackColor={{false: '#767577', true: COLORS.button}}
-                  thumbColor={COLORS.offWhite}
-                  ios_backgroundColor={COLORS.bgdeep}
-                  className="ml-2"
-                  value={isEnabled}
-                  onValueChange={toggleSwitch}
-                  style={{ transform: [{ scale: 0.75 }] }}
-               />
-                <Text className="text-lg font-light text-white ">Remember Me</Text>
+                <View className="flex flex-row items-center gap-3">
+                  <CustomSwitch value={isEnabled} onValueChange={toggleSwitch} />
+                  <Text className="text-lg font-light text-white ">Remember Me</Text>
                 </View>
                 <TouchableOpacity
                   onPress={() => {
-                     router.push('/auth/forgotpass');
+                    router.push('/auth/forgotpass');
                   }}>
                   <Text className="text-lg font-medium text-[#D62E2F] underline">
                     Forgot Password?
@@ -119,7 +109,7 @@ export default function Page() {
                     borderRadius: 10,
                   }}>
                   <Text
-                    className="font-roboto text-center text-[20px] font-bold text-white"
+                    className="text-center font-roboto text-[20px] font-bold text-white"
                     style={{ paddingVertical: 15 }}>
                     Log in
                   </Text>
@@ -163,7 +153,7 @@ export default function Page() {
                 </TouchableOpacity>
               </View>
               <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                <Text className="font-roboto text-grayText text-lg font-medium">
+                <Text className="font-roboto text-lg font-medium text-grayText">
                   Don't have an account?{' '}
                 </Text>
                 <TouchableOpacity
@@ -175,12 +165,13 @@ export default function Page() {
               </View>
               <TouchableOpacity
                 style={{ borderWidth: 1, borderColor: '#00E5FF', borderRadius: 10, marginTop: 10 }}
-                onPress={() => router.push({
-                  pathname: "/(tabs)/home",
-                  params: { role: "guest" }
-               })}
-                >
-                <Text className="font-roboto px-[50px] py-[8px] text-lg font-semibold text-[#00E5FF]">
+                onPress={() =>
+                  router.push({
+                    pathname: '/(tabs)/home',
+                    params: { role: 'guest' },
+                  })
+                }>
+                <Text className="px-[50px] py-[8px] font-roboto text-lg font-semibold text-[#00E5FF]">
                   Continue As Guest
                 </Text>
               </TouchableOpacity>

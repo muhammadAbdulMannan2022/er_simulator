@@ -64,7 +64,7 @@ export default function Page() {
               </View>
             </View>
             <TouchableOpacity
-              onPress={() => router.push('/auth/login')}
+              onPress={() => router.replace('/auth/login')}
               className="absolute -right-1 pt-6"
               style={{ bottom: 150 }}>
               <Svg width={73} height={240} viewBox="0 0 73 240" fill="none">
