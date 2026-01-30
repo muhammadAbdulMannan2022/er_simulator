@@ -1,5 +1,13 @@
 import Layout from 'components/layout';
-import { Text, View, Image, Pressable, TouchableOpacity, Animated, PanResponder } from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  Pressable,
+  TouchableOpacity,
+  Animated,
+  PanResponder,
+} from 'react-native';
 import Heartbit from '../../../assets/svgs/heartbit.svg';
 import { Heart } from 'lucide-react-native';
 import InputBox from 'components/ui/inputbox';
@@ -13,8 +21,8 @@ import { useLocalSearchParams } from 'expo-router/build/hooks';
 
 export default function Index() {
   const dummyForm = useForm();
-  const { role } = useLocalSearchParams()
-  console.log(role)
+  const { role } = useLocalSearchParams();
+  console.log(role);
 
   const [isBeastMode, setIsBeastMode] = useState(false);
   const [sliderWidth, setSliderWidth] = useState(0);
@@ -86,7 +94,7 @@ export default function Index() {
           padding={16}
         />
 
-        {role === "guest" ? <CardWithBox /> : <CardWithBar />}
+        {role === 'guest' ? <CardWithBox /> : <CardWithBar />}
         <View style={{ marginTop: 30 }}>
           <Text className="font-roboto  text-3xl font-semibold">Skill Level</Text>
 

@@ -10,7 +10,7 @@ const CaseList = () => {
   const [totalCase, setTotalCase] = useState(cases);
   const router = useRouter();
 
-  const handleSeletedCases = (id) => {
+  const handleSeletedCases = (id: string | number) => {
     setTotalCase((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, selected: true } : { ...item, selected: false }

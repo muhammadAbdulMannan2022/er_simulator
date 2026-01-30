@@ -32,6 +32,7 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
         shadowOffset: { width: 0, height: -4 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
+        paddingBottom: 10,
       }}
       onLayout={(e) => setTabBarWidth(e.nativeEvent.layout.width)}>
       {/* Animated Tab Indicator */}
