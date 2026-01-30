@@ -24,6 +24,12 @@
         {
           "initialOrientation": "DEFAULT"
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you upload screenshots of simulation issues to support."
+        }
       ]
     ],
     "orientation": "default",

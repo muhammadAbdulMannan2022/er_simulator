@@ -1,5 +1,6 @@
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
+import * as ImagePicker from 'expo-image-picker';
+import { Image, View, Text, TouchableOpacity, TextInput, Alert } from 'react-native';
 import Layout from 'components/layout';
 import { COLORS } from 'constants/color';
 import Hat from '../../../assets/svgs/hat.svg';
@@ -12,6 +13,26 @@ import Camera from '../../../assets/svgs/camera.svg';
 
 const Support = () => {
   const router = useRouter();
+  const [image, setImage] = useState<string | null>(null);
+
+  const handlePickImage = async () => {
+    // Request permission
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('Permission Denied', 'We need access to your gallery to upload screenshots.');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   return (
     <Layout>
@@ -101,34 +122,59 @@ const Support = () => {
             Screenshot (Optional)
           </Text>
 
-          <View
+          <TouchableOpacity
+            onPress={handlePickImage}
             style={{
               borderWidth: 1,
               borderColor: '#ccc',
               borderRadius: 8,
-
               paddingVertical: 30,
               justifyContent: 'center',
               alignItems: 'center',
               gap: 8,
+              backgroundColor: '#FAFAFA',
             }}>
-            <Camera />
-            <Text>Tap to add a screenshot</Text>
-            <Text>JPG, PNG up to 5MB</Text>
-          </View>
+            {image ? (
+              <View style={{ width: '100%', height: 200 }}>
+                <Image
+                  source={{ uri: image }}
+                  style={{ width: '100%', height: '100%' }}
+                  resizeMode="contain"
+                />
+                <TouchableOpacity
+                  onPress={() => setImage(null)}
+                  style={{
+                    position: 'absolute',
+                    top: 5,
+                    right: 5,
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    borderRadius: 15,
+                    padding: 5,
+                  }}>
+                  <X size={18} color="#fff" />
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <>
+                <Camera />
+                <Text style={{ fontSize: 16, color: '#527F7B' }}>Tap to add a screenshot</Text>
+                <Text style={{ fontSize: 12, color: '#888' }}>JPG, PNG up to 5MB</Text>
+              </>
+            )}
+          </TouchableOpacity>
         </View>
       </View>
       <View style={{ width: '92%', alignSelf: 'center', marginTop: 50, marginBottom: 40 }}>
         <TouchableOpacity
           style={{
-            backgroundColor: COLORS.deep,
+            backgroundColor: '#E26C39',
             paddingHorizontal: 20,
             paddingVertical: 12,
             borderRadius: 10,
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            borderColor: COLORS.deep,
+            borderColor: '#E26C39',
             borderWidth: 1,
             flexDirection: 'row',
             gap: 10,
