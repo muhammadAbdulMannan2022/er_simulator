@@ -1,14 +1,19 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import { CircleCheckBig } from 'lucide-react-native';
 
-const Stater = () => {
-  const [open, setOpen] = useState(false);
+interface PlanProps {
+  open: boolean;
+  onPress: () => void;
+}
 
+const Stater = ({ open, onPress }: PlanProps) => {
   return (
     <>
       {open ? (
-        <View
+        <TouchableOpacity
+          onPress={onPress}
+          activeOpacity={0.9}
           style={{
             backgroundColor: '#115D6B',
             width: '95%',
@@ -40,8 +45,7 @@ const Stater = () => {
                     width: '60%',
                     gap: 10,
                   }}>
-                  <TouchableOpacity
-                    onPress={() => setOpen(false)}
+                  <View
                     style={{
                       marginTop: 5,
                       height: 20,
@@ -110,9 +114,11 @@ const Stater = () => {
               </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       ) : (
-        <View
+        <TouchableOpacity
+          onPress={onPress}
+          activeOpacity={0.9}
           style={{
             backgroundColor: '#0C3B44',
             width: '95%',
@@ -141,8 +147,7 @@ const Stater = () => {
                     width: '60%',
                     gap: 10,
                   }}>
-                  <TouchableOpacity
-                    onPress={() => setOpen(true)}
+                  <View
                     style={{
                       marginTop: 5,
                       height: 22,
@@ -177,7 +182,7 @@ const Stater = () => {
               </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       )}
     </>
   );

@@ -26,7 +26,12 @@ export default function PlanPrice() {
   const router = useRouter();
   const { height } = useWindowDimensions();
     const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
+    const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
     const [selected, setSelected] = useState<string | null>(null);
+
+    const handleSelectPlan = (plan: string) => {
+      setSelectedPlan(prev => prev === plan ? null : plan);
+    };
 
     const handleSelectOption = (option: string) => {
     setSelected(option);
@@ -40,7 +45,7 @@ export default function PlanPrice() {
           colors={['#101112', '#000000']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          className="absolute inset-0   py-16">
+          className="absolute inset-0   ">
           {/* Radial gradient overlay */}
           <ImageBackground
             source={require('../../assets/images/splash-radial-gradient.png')}
@@ -77,10 +82,10 @@ export default function PlanPrice() {
                     width: '100%',
                     alignItems: 'center',
                   }}>
-                  <Stater />
-                  <Core />
-                  <Pro />
-                  <SummitPlan />
+                  <Stater open={selectedPlan === 'starter'} onPress={() => handleSelectPlan('starter')} />
+                  <Core open={selectedPlan === 'core'} onPress={() => handleSelectPlan('core')} />
+                  <Pro open={selectedPlan === 'pro'} onPress={() => handleSelectPlan('pro')} />
+                  <SummitPlan open={selectedPlan === 'summit'} onPress={() => handleSelectPlan('summit')} />
                 </View>
                 <View style={{ width: '95%', marginTop: 5, marginBottom: 20, gap: 18 }}>
                   <TouchableOpacity
@@ -109,6 +114,7 @@ export default function PlanPrice() {
                   onClose={() => setBottomSheetVisible(false)}
                   title={'Emergen'}
                   options={['A', 'B', 'C', 'D']}
+                  // @ts-ignore
                   onSelect={handleSelectOption}
                 />
               </View>

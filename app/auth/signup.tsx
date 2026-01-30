@@ -44,7 +44,7 @@ export default function SignUp() {
           colors={['#101112', '#000000']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          className="absolute inset-0   pb-16">
+          className="absolute inset-0  ">
           {/* Radial gradient overlay */}
           <ImageBackground
             source={require('../../assets/images/splash-radial-gradient.png')}
@@ -62,7 +62,7 @@ export default function SignUp() {
                 minHeight: height,
               }}>
               {/* Center logo */}
-              <View className="flex h-full w-full flex-col items-center justify-center gap-3 px-6 py-5">
+              <View className="flex h-full w-full flex-col items-center justify-center gap-3 px-6 py-5 pb-20">
                 <View className="flex w-full items-center justify-center py-5">
                   <ImageBackground
                     source={require('../../assets/images/splash-icon-full.png')}
