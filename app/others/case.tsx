@@ -25,7 +25,7 @@ const Case = () => {
         <View
           style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <TouchableOpacity
-            onPress={() => router.back()}
+            onPress={() => router.push('./caselist')}
             style={{
               backgroundColor: '#82A4A5',
               borderWidth: 1,
@@ -74,9 +74,7 @@ const Case = () => {
           </View>
 
           <View>
-            <Text
-              className="w-[90%] font-roboto text-3xl font-bold"
-              style={{ color: COLORS.deep }}>
+            <Text className="w-[90%] font-roboto text-3xl font-bold" style={{ color: COLORS.deep }}>
               Acute MyocardialInfarction with Cardiogenic Shock
             </Text>
             <Text
@@ -94,33 +92,34 @@ const Case = () => {
               Learning Objectives:
             </Text>
             <View style={{ gap: 20, marginTop: 20 }}>
-              {isMounted && [
-                'Rapidly recognize STEMI patterns on 12-lead ECG and initiate protocol.',
-                'Implement immediate pharmacological interventions including Aspirin and Heparin.',
-                'Coordinate emergency transfer and stabilization for primary PCI.',
-              ].map((objective, index) => (
-                <View key={index} style={styles.objectiveWrapper}>
-                  {/* The actual content (hidden under blur) */}
-                  <View style={styles.objectiveContent}>
-                    <CircleCheckBig color={COLORS.deep} size={20} />
-                    <Text style={styles.objectiveText}>{objective}</Text>
-                  </View>
+              {isMounted &&
+                [
+                  'Rapidly recognize STEMI patterns on 12-lead ECG and initiate protocol.',
+                  'Implement immediate pharmacological interventions including Aspirin and Heparin.',
+                  'Coordinate emergency transfer and stabilization for primary PCI.',
+                ].map((objective, index) => (
+                  <View key={index} style={styles.objectiveWrapper}>
+                    {/* The actual content (hidden under blur) */}
+                    <View style={styles.objectiveContent}>
+                      <CircleCheckBig color={COLORS.deep} size={20} />
+                      <Text style={styles.objectiveText}>{objective}</Text>
+                    </View>
 
-                  {/* Blur Overlay */}
-                  <BlurView
-                    blurType="light"
-                    blurAmount={1}
-                    reducedTransparencyFallbackColor="white"
-                    style={[StyleSheet.absoluteFill, { borderRadius: 12 }]}
-                  />
+                    {/* Blur Overlay */}
+                    <BlurView
+                      blurType="light"
+                      blurAmount={1}
+                      reducedTransparencyFallbackColor="white"
+                      style={[StyleSheet.absoluteFill, { borderRadius: 12 }]}
+                    />
 
-                  {/* Lock Overlay Content */}
-                  <View style={styles.lockOverlay}>
-                    <LockKeyhole color="#527F7B" size={20} />
-                    <Text style={styles.lockText}>Complete the simulation to Unlock</Text>
+                    {/* Lock Overlay Content */}
+                    <View style={styles.lockOverlay}>
+                      <LockKeyhole color="#527F7B" size={20} />
+                      <Text style={styles.lockText}>Complete the simulation to Unlock</Text>
+                    </View>
                   </View>
-                </View>
-              ))}
+                ))}
             </View>
           </View>
 

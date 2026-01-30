@@ -1,5 +1,5 @@
 import NoRippleTabButton from 'components/no-rippler-pressable';
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import { Briefcase, Settings2, UserRound } from 'lucide-react-native';
 import { StatusBar, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,6 +10,7 @@ import { Svg, Path } from 'react-native-svg';
 
 export default function Layout() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
 
   return (
     <>
@@ -82,6 +83,12 @@ export default function Layout() {
             />
             <Tabs.Screen
               name="profile"
+              listeners={{
+                tabPress: (e) => {
+                  e.preventDefault();
+                  router.replace('/(tabs)/profile');
+                },
+              }}
               options={{
                 title: 'Profile',
                 tabBarIcon: ({ color }) => (

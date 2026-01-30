@@ -9,10 +9,11 @@ import {
   ScrollView,
   Platform,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { COLORS } from 'constants/color';
-import { BlurView } from 'expo-blur';
+import { BlurView } from '@react-native-community/blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import TV from '../../assets/svgs/tv.svg';
 import Med from '../../assets/svgs/med.svg';
@@ -25,11 +26,14 @@ import Vertical from '../../assets/svgs/vertical.svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import ResourcesModal from '../../components/ui/resources-modal';
 
 const ChatWithText = () => {
   const { height, width } = useWindowDimensions();
   const [isLandscape, setIsLandscape] = useState(width > height);
   const [isMounted, setIsMounted] = useState(false);
+  const [showResources, setShowResources] = useState(false);
+  const [resourcesEmpty, setResourcesEmpty] = useState(false);
 
   useEffect(() => {
     setIsLandscape(width > height);
@@ -141,19 +145,27 @@ const ChatWithText = () => {
         locations={[0.3, 0.6]}
         style={StyleSheet.absoluteFill}
       />
-      {isMounted && (
-        <View style={styles.blurWrapper}>
-          <BlurView intensity={50} tint="dark" style={styles.blurView}>
-            <View style={styles.iconArea}>
-              <TV />
-              {isLandscape && <View style={{ flex: 1 }} />}
+      <View style={styles.blurWrapper}>
+        <BlurView blurType="dark" blurAmount={10} style={styles.blurView}>
+          <View style={styles.iconArea}>
+            <TV />
+            {isLandscape && <View style={{ flex: 1 }} />}
+            <TouchableOpacity onPress={() => setShowResources(true)}>
               <Med />
-            </View>
-          </BlurView>
-        </View>
-      )}
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </View>
     </View>
   );
+
+  if (!isMounted) {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#06272B', justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color={COLORS.button} />
+      </View>
+    );
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: '#06272B' }}>
@@ -254,7 +266,9 @@ const ChatWithText = () => {
                   placeholder="Type Your Message"
                   placeholderTextColor="#FFFFFF"
                 />
-                <Send />
+                <TouchableOpacity onPress={() => router.push('/(tabs)/profile/quizresult')}>
+                  <Send />
+                </TouchableOpacity>
               </View>
             </KeyboardAvoidingView>
           </View>
@@ -266,6 +280,16 @@ const ChatWithText = () => {
         </View>
         {!isLandscape && renderControls()}
       </ImageBackground>
+      <ResourcesModal
+        visible={showResources}
+        onClose={() => setShowResources(false)}
+        isEmpty={resourcesEmpty}
+      />
+      {/* Hidden toggle for testing: long press at bottom */}
+      <TouchableOpacity 
+        style={{ position: 'absolute', bottom: 0, width: '100%', height: 20, opacity: 0 }} 
+        onLongPress={() => setResourcesEmpty(!resourcesEmpty)} 
+      />
     </View>
   );
 };

@@ -7,10 +7,11 @@ import {
   TextInput,
   ScrollView,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { COLORS } from 'constants/color';
-import { BlurView } from 'expo-blur';
+import { BlurView } from '@react-native-community/blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import TV from '../../assets/svgs/tv.svg';
 import Med from '../../assets/svgs/med.svg';
@@ -25,11 +26,14 @@ import Layout from 'components/layout';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import ResourcesModal from '../../components/ui/resources-modal';
 
 const ChatBox = () => {
   const { height, width } = useWindowDimensions();
   const [isLandscape, setIsLandscape] = useState(width > height);
   const [isMounted, setIsMounted] = useState(false);
+  const [showResources, setShowResources] = useState(false);
+  const [resourcesEmpty, setResourcesEmpty] = useState(false);
 
   useEffect(() => {
     setIsLandscape(width > height);
@@ -142,37 +146,48 @@ const ChatBox = () => {
         locations={[0.3, 0.6]}
         style={StyleSheet.absoluteFill}
       />
-      {isMounted && (
-        <View style={styles.blurWrapper}>
-          <BlurView intensity={50} tint="dark" style={styles.blurView}>
-            <View style={isLandscape ? styles.horiControls : styles.vertControls}>
-              {!isLandscape && <TV />}
-              <View style={styles.micArea}>
-                <LinearGradient
-                  colors={['#0096A7', '#B92D47']}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 0, y: 1 }}
-                  style={styles.micCircle}>
-                  <Mic />
-                </LinearGradient>
-                <Text className="font-roboto mb-2.5 text-sm text-[#E39348]">
-                  Tap To Speak With AI
-                </Text>
 
-                <TouchableOpacity
-                  onPress={() => router.push('/others/chatwithtext')}
-                  style={styles.textBtn}>
-                  <TLogo />
-                  <Text className="font-roboto text-[16px] text-[#fff]">Text Input</Text>
-                </TouchableOpacity>
-              </View>
-              {!isLandscape && <Med />}
+      <View style={styles.blurWrapper}>
+        <BlurView blurType="dark" blurAmount={10} style={styles.blurView}>
+          <View style={isLandscape ? styles.horiControls : styles.vertControls}>
+            {!isLandscape && <TV />}
+            <View style={styles.micArea}>
+              <LinearGradient
+                colors={['#0096A7', '#B92D47']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={styles.micCircle}>
+                <Mic />
+              </LinearGradient>
+              <Text className="mb-2.5 font-roboto text-sm text-[#E39348]">
+                Tap To Speak With AI
+              </Text>
+
+              <TouchableOpacity
+                onPress={() => router.push('/others/chatwithtext')}
+                style={styles.textBtn}>
+                <TLogo />
+                <Text className="font-roboto text-[16px] text-[#fff]">Text Input</Text>
+              </TouchableOpacity>
             </View>
-          </BlurView>
-        </View>
-      )}
+            {!isLandscape && (
+              <TouchableOpacity onPress={() => setShowResources(true)}>
+                <Med />
+              </TouchableOpacity>
+            )}
+          </View>
+        </BlurView>
+      </View>
     </View>
   );
+
+  if (!isMounted) {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#06272B', justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color={COLORS.button} />
+      </View>
+    );
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: '#06272B' }}>
@@ -195,8 +210,9 @@ const ChatBox = () => {
                     borderTopRightRadius: 15,
                     borderBottomRightRadius: 15,
                   }}>
-                  Hello, this is Swadhin, your Medical Simulation Assistant. I’m here to help support
-                  your training by providing realistic, interactive simulations that improve clinical.
+                  Hello, this is Swadhin, your Medical Simulation Assistant. I’m here to help
+                  support your training by providing realistic, interactive simulations that improve
+                  clinical.
                 </Text>
               </View>
               <View style={{ alignItems: 'flex-end' }}>
@@ -219,14 +235,20 @@ const ChatBox = () => {
             </View>
           </ScrollView>
 
-          {isLandscape && (
-            <View style={{ width: 300, height: '100%' }}>
-              {renderControls()}
-            </View>
-          )}
+          {isLandscape && <View style={{ width: 300, height: '100%' }}>{renderControls()}</View>}
         </View>
         {!isLandscape && renderControls()}
       </ImageBackground>
+      <ResourcesModal
+        visible={showResources}
+        onClose={() => setShowResources(false)}
+        isEmpty={resourcesEmpty}
+      />
+      {/* Hidden toggle for testing: long press at bottom */}
+      <TouchableOpacity 
+        style={{ position: 'absolute', bottom: 0, width: '100%', height: 20, opacity: 0 }} 
+        onLongPress={() => setResourcesEmpty(!resourcesEmpty)} 
+      />
     </View>
   );
 };
